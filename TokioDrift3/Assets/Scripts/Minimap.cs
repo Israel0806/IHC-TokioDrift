@@ -7,6 +7,7 @@ public class Minimap : MonoBehaviour
     public Transform player;
     void LateUpdate()
     {
+        if (player == null) return;
         Vector3 newPos = player.position;
         newPos.y = transform.position.y;
         transform.position = newPos;

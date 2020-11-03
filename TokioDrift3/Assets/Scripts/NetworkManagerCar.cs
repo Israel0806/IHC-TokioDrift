@@ -18,7 +18,7 @@ public class NetworkManagerCar : NetworkManager
     #region Unity Callbacks
     bool calledConnected, calledNotConnected;
     public Transform playerSpawn;
-    public GameObject Kart;
+    //public GameObject Kart;
     public GameObject TextMobileConn;
 
     public void DisableMobileText()
@@ -34,7 +34,7 @@ public class NetworkManagerCar : NetworkManager
         TextMobileConn.GetComponent<TextMeshProUGUI>().color = Color.green;
         TextMobileConn.GetComponent<TextMeshProUGUI>().text = "Phone connected!";
         Invoke("DisableMobileText", 3f);
-        Kart.GetComponent<ArcadeKart>().hasPhoneConnected = true;
+        //Kart.GetComponent<ArcadeKart>().hasPhoneConnected = true;
 
         GameObject player = Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
         NetworkServer.AddPlayerForConnection(conn, player);
@@ -69,7 +69,7 @@ public class NetworkManagerCar : NetworkManager
         calledNotConnected = false;
         calledConnected = false;
         base.Start();
-        base.StartServer();
+        //base.StartServer();
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public class NetworkManagerCar : NetworkManager
             TextMobileConn.GetComponent<TextMeshProUGUI>().color = Color.red;
             TextMobileConn.GetComponent<TextMeshProUGUI>().text = "Phone disconnected!";
             Invoke("DisableMobileText", 3f);
-            Kart.GetComponent<ArcadeKart>().hasPhoneConnected = false;
+            //Kart.GetComponent<ArcadeKart>().hasPhoneConnected = false;
         } else
         {
             if (calledConnected) return;
@@ -97,7 +97,7 @@ public class NetworkManagerCar : NetworkManager
             TextMobileConn.GetComponent<TextMeshProUGUI>().color = Color.green;
             TextMobileConn.GetComponent<TextMeshProUGUI>().text = "Phone connected!";
             Invoke("DisableMobileText", 3f);
-            Kart.GetComponent<ArcadeKart>().hasPhoneConnected = true;
+            //Kart.GetComponent<ArcadeKart>().hasPhoneConnected = true;
         }
     }
 
@@ -279,7 +279,7 @@ public class NetworkManagerCar : NetworkManager
     /// This is called when a server is stopped - including when a host is stopped.
     /// </summary>
     public override void OnStopServer() {
-        Kart.GetComponent< ArcadeKart >().hasPhoneConnected = false;
+        //Kart.GetComponent< ArcadeKart >().hasPhoneConnected = false;
         TextMobileConn.SetActive(true);
         TextMobileConn.GetComponent<TextMeshProUGUI>().text = "Phone disconnected!";
         TextMobileConn.GetComponent<TextMeshProUGUI>().color = Color.red;

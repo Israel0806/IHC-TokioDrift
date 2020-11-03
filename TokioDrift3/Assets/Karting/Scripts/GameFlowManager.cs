@@ -52,6 +52,7 @@ public class GameFlowManager : MonoBehaviour
 
     void Start()
     {
+        //if (playerKart == null) return;
         if (autoFindKarts)
         {
             karts = FindObjectsOfType<ArcadeKart>();
@@ -74,6 +75,7 @@ public class GameFlowManager : MonoBehaviour
         loseDisplayMessage.gameObject.SetActive(false);
 
         m_TimeManager.StopRace();
+        if (playerKart == null) return;
         foreach (ArcadeKart k in karts)
         {
 			k.SetCanMove(false);

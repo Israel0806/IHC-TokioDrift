@@ -25,6 +25,7 @@ public class ControlWheel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Car == null) return;
         ImageSteeringWheel.transform.eulerAngles = new Vector3(0, 0, -1 * Car.transform.eulerAngles.y);
         if (!stateChange)
         {

@@ -18,6 +18,7 @@ public class SpeedBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		if (kart == null) return;
 		rb = kart.GetComponent<Rigidbody>();
     }
 	/// maxAngle -- maxSpeed
@@ -26,6 +27,7 @@ public class SpeedBar : MonoBehaviour
 
 	void Update()
 	{
+		if (kart == null) return;
 		currentValue = rb.velocity.magnitude;
 		TextSpeedBar.text = currentValue.ToString("0");
 		if (TextVoiceCommand.text == "turbo activado") maxAngle = 0.58f; else maxAngle = 0.5f;
