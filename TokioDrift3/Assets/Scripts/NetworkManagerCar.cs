@@ -29,12 +29,6 @@ public class NetworkManagerCar : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
-
-        CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
-            SteamLobby.LobbyID,
-            numPlayers - 1);
-
-        
         calledConnected = true;
         calledNotConnected = false;
         TextMobileConn.SetActive(true);
@@ -44,11 +38,17 @@ public class NetworkManagerCar : NetworkManager
         //Kart.GetComponent<ArcadeKart>().hasPhoneConnected = true;
 
         GameObject player = Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
-        var playerInfoDisplay = player.GetComponent<PlayerInfoDisplay>();
+        NetworkServer.AddPlayerForConnection(conn, player);
+        
+        
+        /// Steam connection
+        CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
+            SteamLobby.LobbyID,
+            numPlayers - 1);
+
+        var playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
 
         playerInfoDisplay.SetSteamId(steamId.m_SteamID);
-        NetworkServer.AddPlayerForConnection(conn, player);
-
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
