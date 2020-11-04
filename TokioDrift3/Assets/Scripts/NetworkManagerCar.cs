@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using Mirror;
+using Steamworks;
 using System.Diagnostics;
 using System;
 using KartGame.KartSystems;
@@ -28,6 +29,12 @@ public class NetworkManagerCar : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
+
+        CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
+            SteamLobby.LobbyID,
+            numPlayers - 1);
+
+        
         calledConnected = true;
         calledNotConnected = false;
         TextMobileConn.SetActive(true);
@@ -37,7 +44,11 @@ public class NetworkManagerCar : NetworkManager
         //Kart.GetComponent<ArcadeKart>().hasPhoneConnected = true;
 
         GameObject player = Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
+        var playerInfoDisplay = player.GetComponent<PlayerInfoDisplay>();
+
+        playerInfoDisplay.SetSteamId(steamId.m_SteamID);
         NetworkServer.AddPlayerForConnection(conn, player);
+
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
@@ -265,10 +276,10 @@ public class NetworkManagerCar : NetworkManager
     /// <summary>
     /// This is invoked when the client is started.
     /// </summary>
-    public override void OnStartClient()
-    {
-        base.OnStartClient();
-    }
+    //public override void OnStartClient()
+    //{
+    //    base.OnStartClient();
+    //}
 
     /// <summary>
     /// This is called when a host is stopped.

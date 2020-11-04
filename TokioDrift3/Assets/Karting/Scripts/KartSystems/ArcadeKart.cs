@@ -154,6 +154,13 @@ namespace KartGame.KartSystems
             suspensionNeutralRot = SuspensionBody.transform.localRotation;
         }
 
+        void Start()
+        {
+            ComandoVoz = GameObject.Find("ComandoVoz").GetComponent<TextMeshProUGUI>();
+            TextTopSpeed = GameObject.Find("TopSpeed").GetComponent<Text>();
+            speedText = GameObject.Find("CartSpeed").GetComponent<Text>();
+        }
+
         void FixedUpdate()
         {
             ResetIfStuck();

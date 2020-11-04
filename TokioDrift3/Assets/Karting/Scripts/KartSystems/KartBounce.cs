@@ -45,6 +45,7 @@ namespace KartGame.KartSystems
         void Start()
         {
             kart = GetComponent<ArcadeKart>();
+            score = GameObject.Find("TextScore").GetComponent<TextMeshProUGUI>();
         }
 
         void Update()
