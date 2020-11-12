@@ -4,9 +4,6 @@ Cmd: compileComputeKernel
   error: 2 plat 4 at Generic.compute(13): failed to open source file: 'Tensor.cginc'
   api=4 insize=7960 outsize=0 ok=0
 Cmd: compileComputeKernel
-  error: 2 plat 4 at Generic.compute(13): failed to open source file: 'Tensor.cginc'
-  api=4 insize=7960 outsize=0 ok=0
-Cmd: compileComputeKernel
   error: 2 plat 4 at Dense.compute(13): failed to open source file: 'Tensor.cginc'
   api=4 insize=68835 outsize=0 ok=0
 Cmd: compileComputeKernel
@@ -19,8 +16,8 @@ Cmd: compileComputeKernel
   error: 2 plat 4 at Conv.compute(22): failed to open source file: 'Tensor.cginc'
   api=4 insize=31899 outsize=0 ok=0
 Cmd: compileComputeKernel
-  error: 2 plat 4 at Pool.compute(8): failed to open source file: 'Tensor.cginc'
-  api=4 insize=6546 outsize=0 ok=0
+  error: 2 plat 4 at BarracudaReferenceImpl.compute(64): failed to open source file: 'Tensor.cginc'
+  api=4 insize=47665 outsize=0 ok=0
 Cmd: compileComputeKernel
   error: 2 plat 4 at BarracudaReferenceImpl.compute(64): failed to open source file: 'Tensor.cginc'
   api=4 insize=47665 outsize=0 ok=0

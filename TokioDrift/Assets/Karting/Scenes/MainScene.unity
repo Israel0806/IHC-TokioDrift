@@ -16930,7 +16930,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: 
   transport: {fileID: 1491406065}
-  networkAddress: localhost
+  networkAddress: 1144119634
   maxConnections: 2
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60

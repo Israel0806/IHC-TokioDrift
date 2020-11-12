@@ -47,7 +47,7 @@ public class KartController : NetworkBehaviour
         
         arcadeKart.SetCanMove(false);
 
-        if (networkManager.numPlayers == 1)
+        if (networkManager.numPlayers == 2)
             gameManager.GetComponent<GameFlowManager>().GameReady();
 
     }
