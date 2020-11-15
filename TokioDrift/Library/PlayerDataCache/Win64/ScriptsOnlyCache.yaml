@@ -1207,7 +1207,7 @@ ScriptsOnlyBuild:
     className: CinemachineCollisionImpulseSource
   - hash:
       serializedVersion: 2
-      Hash: 8e95b2b9bddd44a4a603e0164fd7da70
+      Hash: 583f754319216492a46dffa8b8e8b277
     assemblyName: KartGame.dll
     namespaceName: KartGame.KartSystems
     className: ArcadeKart
@@ -2365,7 +2365,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 9bd6320ed15d992bd69d8d82e3d5906f
+      Hash: 92d77c87395ebb1fcd72bc87525982bd
     assemblyName: KartGame.dll
     namespaceName: 
     className: GameFlowManager
@@ -2745,4 +2745,4 @@ ScriptsOnlyBuild:
   - Assets/Karting/Scenes/Tutorial1.unity
   - Assets/Karting/Scenes/Tutorial3.unity
   - Assets/Karting/Scenes/Tutorial0.unity
-  playerPath: D:/UCSP/Semestres/Semestre_VIII/IHC/TokioDrift/Build/New Unity Project.exe
+  playerPath: C:/Users/israe/Desktop/asd/New Unity Project.exe

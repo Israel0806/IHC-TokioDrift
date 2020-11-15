@@ -20,6 +20,10 @@ public class NetworkManagerCar : NetworkManager
     bool calledConnected, calledNotConnected;
     public Transform playerSpawn1;
     public Transform playerSpawn2;
+
+    private bool gameStarted;
+    private GameObject gameManager;
+
     //public CinemachineVirtualCamera cinematicCamera;
     //public GameObject Kart;
     public GameObject TextMobileConn;
@@ -41,6 +45,14 @@ public class NetworkManagerCar : NetworkManager
         Transform trans = numPlayers == 0 ? playerSpawn1 : playerSpawn2;
         GameObject player = Instantiate(playerPrefab, trans.position, trans.rotation);
         NetworkServer.AddPlayerForConnection(conn, player);
+
+        // Start game?
+        //if (numPlayers == 2 && !gameStarted)
+        //{
+        //    gameStarted = true;
+        //    gameManager.GetComponent<GameFlowManager>().GameReady();
+        //}
+        //print(numPlayers);
 
         /// follow camera
         //conn.identity.GetComponent<
@@ -84,6 +96,9 @@ public class NetworkManagerCar : NetworkManager
     /// </summary>
     public override void Start()
     {
+        gameManager = GameObject.Find("GameManager");
+        gameStarted = false;
+
         calledNotConnected = false;
         calledConnected = false;
         base.Start();

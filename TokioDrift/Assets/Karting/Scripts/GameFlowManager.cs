@@ -43,15 +43,18 @@ public class GameFlowManager : MonoBehaviour
     public bool autoFindKarts = true;
     public ArcadeKart playerKart;
 
-    ArcadeKart[] karts;
+    public ArcadeKart[] karts;
     ObjectiveManager m_ObjectiveManager;
     TimeManager m_TimeManager;
     float m_TimeLoadEndGameScene;
     string m_SceneToLoad;
     float elapsedTimeBeforeEndScene = 0;
 
+    bool isGameReady;
+
     void Start()
     {
+        isGameReady = false;
         //if (playerKart == null) return;
         if (autoFindKarts)
         {
@@ -88,7 +91,7 @@ public class GameFlowManager : MonoBehaviour
 
     public void GameReady()
     {
-        karts = FindObjectsOfType<ArcadeKart>();
+        //karts = FindObjectsOfType<ArcadeKart>();
 
         ShowRaceCountdownAnimation();
         StartCoroutine(ShowObjectivesRoutine());
@@ -127,7 +130,6 @@ public class GameFlowManager : MonoBehaviour
 
     void Update()
     {
-        //if (NetworkManager.GetComponent<Mirror.NetworkManagerCar>().numPlayers != 1) return;
         if (gameState != GameState.Play)
         {
             elapsedTimeBeforeEndScene += Time.deltaTime;
@@ -151,6 +153,13 @@ public class GameFlowManager : MonoBehaviour
         }
         else
         {
+            karts = FindObjectsOfType<ArcadeKart>();
+            if (karts.Length == 2 && !isGameReady)
+            {
+                isGameReady = true;
+                gameState = GameState.Play;
+                GameReady();
+            }
             if (m_ObjectiveManager.AreAllObjectivesCompleted())
                 EndGame(true);
 

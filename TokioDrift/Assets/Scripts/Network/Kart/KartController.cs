@@ -15,6 +15,7 @@ public class KartController : NetworkBehaviour
     private NetworkManager networkManager;
     private CinemachineVirtualCamera camera;
     private GameObject gameManager;
+    private bool gameStarted;
 
     [Header("Game Stats")]
     [SyncVar]
@@ -40,15 +41,15 @@ public class KartController : NetworkBehaviour
         camera = GameObject.Find("CinemachineVirtualCamera").GetComponent<CinemachineVirtualCamera>();
         gameManager = GameObject.Find("GameManager");
         arcadeKart = this.GetComponent<ArcadeKart>();
+        arcadeKart.isLocalPlayer = true;
 
         camera.m_Follow = this.transform;
         camera.m_LookAt = this.transform;
         //gameManager.GetComponent<GameFlowManager>().playerKart = this.GetComponent<ArcadeKart>();
-        
-        arcadeKart.SetCanMove(false);
 
-        if (networkManager.numPlayers == 2)
-            gameManager.GetComponent<GameFlowManager>().GameReady();
+        gameStarted = false;
+        arcadeKart.SetCanMove(false);
+        //gameManager.GetComponent<GameFlowManager>().karts[0] = arcadeKart;
 
     }
     #endregion

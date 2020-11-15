@@ -149,10 +149,14 @@ namespace KartGame.KartSystems
         private bool turboActivado;
         private float freno;
 
+        public bool isLocalPlayer;
+
 
         void Awake()
         {
             hasPhoneConnected = false;
+            isLocalPlayer = false;
+
             Rigidbody = GetComponent<Rigidbody>();
             m_Inputs = GetComponents<IInput>();
             suspensionNeutralPos = SuspensionBody.transform.localPosition;
@@ -168,6 +172,11 @@ namespace KartGame.KartSystems
 
         void FixedUpdate()
         {
+            // this allows only to move my car and no one elses
+            if (!isLocalPlayer)
+                return;
+
+
             ResetIfStuck();
 
             GatherInputs();
