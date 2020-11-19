@@ -19,6 +19,9 @@ public class KartController : NetworkBehaviour
     private GameObject gameManager;
     private bool gameStarted;
 
+    private Track[] tracks;
+    private Orb[] orbs;
+
     [Header("Game Stats")]
     [SyncVar]
     public int score;
@@ -42,8 +45,8 @@ public class KartController : NetworkBehaviour
         networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManagerCar>();
         camera = GameObject.Find("CinemachineVirtualCamera").GetComponent<CinemachineVirtualCamera>();
         _Minimap = GameObject.Find("MinimapCamera").GetComponent<Minimap>();
-        FinishLineTrigger = GameObject.Find("ConfettiTrigger").GetComponent<FinishLineTrigger>();
-        FinishLineTrigger.triggerBody = this.Rigidbody;
+        FinishLineTrigger = GameObject.Find("ConfettiTrigger").GetComponent<SimpleTrigger>();
+        FinishLineTrigger.triggerBody = this.GetComponent<Rigidbody>();
         gameManager = GameObject.Find("GameManager");
         arcadeKart = this.GetComponent<ArcadeKart>();
         arcadeKart.isLocalPlayer = true;
@@ -51,12 +54,9 @@ public class KartController : NetworkBehaviour
         _Minimap.player = this.transform;
         camera.m_Follow = this.transform;
         camera.m_LookAt = this.transform;
-        //gameManager.GetComponent<GameFlowManager>().playerKart = this.GetComponent<ArcadeKart>();
 
         gameStarted = false;
         arcadeKart.SetCanMove(false);
-        //gameManager.GetComponent<GameFlowManager>().karts[0] = arcadeKart;
-
     }
     #endregion
 

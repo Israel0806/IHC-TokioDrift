@@ -8,7 +8,7 @@ public class Track : MonoBehaviour
     public GameObject fires;
     public GameObject beacon;
     public GameObject explosion;
-    public ParticleSystem expAnim;
+
 
     public void ExplodeTrack()
     {
