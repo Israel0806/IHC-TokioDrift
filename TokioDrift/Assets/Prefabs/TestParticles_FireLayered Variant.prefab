@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &156071121063587215
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.495413
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 141.59302
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 239.09666
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000031391647
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.000000011924881
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 3.7434164e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dc3e23749a1292e40abf979466c24055, type: 2}
+    - target: {fileID: 19900002, guid: acc1dfe7eb887994a91608061871e683, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 376c74bb3295b6a4ca812ce42ce80e81, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: acc1dfe7eb887994a91608061871e683, type: 3}

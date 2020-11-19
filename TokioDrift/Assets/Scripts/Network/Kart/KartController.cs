@@ -14,6 +14,8 @@ public class KartController : NetworkBehaviour
     private ArcadeKart arcadeKart;
     private NetworkManager networkManager;
     private CinemachineVirtualCamera camera;
+    private Minimap _Minimap;
+    private SimpleTrigger FinishLineTrigger;
     private GameObject gameManager;
     private bool gameStarted;
 
@@ -39,10 +41,14 @@ public class KartController : NetworkBehaviour
     public override void OnStartLocalPlayer() {
         networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManagerCar>();
         camera = GameObject.Find("CinemachineVirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        _Minimap = GameObject.Find("MinimapCamera").GetComponent<Minimap>();
+        FinishLineTrigger = GameObject.Find("ConfettiTrigger").GetComponent<FinishLineTrigger>();
+        FinishLineTrigger.triggerBody = this.Rigidbody;
         gameManager = GameObject.Find("GameManager");
         arcadeKart = this.GetComponent<ArcadeKart>();
         arcadeKart.isLocalPlayer = true;
 
+        _Minimap.player = this.transform;
         camera.m_Follow = this.transform;
         camera.m_LookAt = this.transform;
         //gameManager.GetComponent<GameFlowManager>().playerKart = this.GetComponent<ArcadeKart>();

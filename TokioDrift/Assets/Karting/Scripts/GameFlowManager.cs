@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 using KartGame.KartSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+//using Mirror;
 
 public enum GameState{Play, Won, Lost}
 
@@ -50,7 +51,9 @@ public class GameFlowManager : MonoBehaviour
     string m_SceneToLoad;
     float elapsedTimeBeforeEndScene = 0;
 
+    [Header("Track manager")]
     bool isGameReady;
+    public TrackController TC;
 
     void Start()
     {
@@ -78,15 +81,7 @@ public class GameFlowManager : MonoBehaviour
         loseDisplayMessage.gameObject.SetActive(false);
 
         m_TimeManager.StopRace();
-        //if (playerKart != null) 
-        //    foreach (ArcadeKart k in karts)
-        //        k.SetCanMove(false);
-
         //run race countdown animation
-        //ShowRaceCountdownAnimation();
-        //StartCoroutine(ShowObjectivesRoutine());
-
-        //StartCoroutine(CountdownThenStartRaceRoutine());
     }
 
     public void GameReady()
@@ -97,6 +92,7 @@ public class GameFlowManager : MonoBehaviour
         StartCoroutine(ShowObjectivesRoutine());
 
         StartCoroutine(CountdownThenStartRaceRoutine());
+        TC.Wait3ExplodeTracks();
     }
 
     IEnumerator CountdownThenStartRaceRoutine() {
@@ -154,7 +150,7 @@ public class GameFlowManager : MonoBehaviour
         else
         {
             karts = FindObjectsOfType<ArcadeKart>();
-            if (karts.Length == 2 && !isGameReady)
+            if (karts.Length == 1 && !isGameReady)
             {
                 isGameReady = true;
                 gameState = GameState.Play;

@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6485974366742926765
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100002, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_Name
+      value: Layer2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -44.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 141.59302
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 238.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1.9106855e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[0].value
+      value: 0.40839696
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
+      value: 0.21944994
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].value
+      value: 0.6920656
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a3c6b5f9d93c2646904df42ff3eb726, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0fddeeac4d9b4a74981d41ab7ae6f622, type: 3}
