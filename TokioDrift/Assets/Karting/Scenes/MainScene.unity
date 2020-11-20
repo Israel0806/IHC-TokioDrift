@@ -2247,7 +2247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267994425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -93.3, y: 0, z: -18.3}
+  m_LocalPosition: {x: -2.53, y: 0, z: 35.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141022878}
@@ -6825,7 +6825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606268182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.7, y: 0, z: 31.6}
+  m_LocalPosition: {x: 102.72, y: 0, z: 19.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141022878}
@@ -7697,7 +7697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674377621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.8, y: 1, z: 43.8}
+  m_LocalPosition: {x: 55.8, y: -0.61, z: 43.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141022878}
@@ -11143,7 +11143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 960220163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40.905174, y: 0, z: 76.446594}
+  m_LocalPosition: {x: 34.1, y: 0, z: 42.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 994667060}
@@ -17322,6 +17322,8 @@ MonoBehaviour:
   - {fileID: 2062852910226694870, guid: d9fa7d807d2469047ae96dee65e25994, type: 3}
   playerSpawn1: {fileID: 659552159}
   playerSpawn2: {fileID: 1903117445}
+  TC: {fileID: 960220165}
+  OC: {fileID: 2141022879}
   TextMobileConn: {fileID: 832861588}
 --- !u!114 &1491406067
 MonoBehaviour:
@@ -20739,7 +20741,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769858928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -17.5, y: 0, z: 3.1}
+  m_LocalPosition: {x: 41.9, y: 0, z: 86.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2141022878}
@@ -24389,8 +24391,8 @@ MonoBehaviour:
   orbSpawn1: {fileID: 1200186884}
   orbSpawn2: {fileID: 674377622}
   orbSpawn3: {fileID: 1769858929}
-  orbSpawn4: {fileID: 606268183}
   orbSpawn5: {fileID: 267994426}
+  orbSpawn4: {fileID: 606268183}
   orbSpawn6: {fileID: 438747369}
   orbSpawn7: {fileID: 2077999713}
   orbSpawn8: {fileID: 714353533}
@@ -24404,6 +24406,7 @@ MonoBehaviour:
   randomNumber: 0
   auxAllOrbsCollected: 1
   tracks: []
+  orbs: []
 --- !u!114 &2141022880
 MonoBehaviour:
   m_ObjectHideFlags: 0

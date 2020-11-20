@@ -15,9 +15,9 @@ public class Orb : NetworkBehaviour
 
     //Start the server
     /*public override void OnStartServer()
-        {
+    {
         
-        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,19 @@ public class Orb : NetworkBehaviour
         
     }
     */
+
+    // destroy for everyone on the server
+    [Server]
+    public void DestroySelf()
+    {
+        NetworkServer.Destroy(gameObject);
+    }
+
+    public GameObject GetObject()
+    {
+        return gameObject;
+    }
+
     [ServerCallback]
     void OnTriggerEnter(Collider co)
     {

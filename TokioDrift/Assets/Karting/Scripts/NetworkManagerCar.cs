@@ -21,6 +21,12 @@ public class NetworkManagerCar : NetworkManager
     public Transform playerSpawn1;
     public Transform playerSpawn2;
 
+    [Header("Track manager")]
+    bool isGameReady;
+    public TrackController TC;
+    public OrbController OC;
+
+
     private GameObject gameManager;
 
     public GameObject TextMobileConn;
@@ -53,6 +59,40 @@ public class NetworkManagerCar : NetworkManager
         var playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
 
         playerInfoDisplay.SetSteamId(steamId.m_SteamID);
+        if (numPlayers == 1)
+        {
+            print("si");
+            /// TRACKS
+            int randomNumber = 0;
+            int index = 0;
+            randomNumber = UnityEngine.Random.Range(0, 10);
+            TC.prepareForInstance();
+            foreach (Transform trackSpawn in TC.trackSpawns)
+            {
+                if (randomNumber == 10) randomNumber = 0;
+                GameObject track = Instantiate(TC.trackPrefab, trackSpawn.position, trackSpawn.rotation);
+                NetworkServer.Spawn(track);
+                TC.tracks[index] = track.GetComponent<Track>();
+                TC.tracks[index].TrackNumber = randomNumber;
+
+                // TC.Invoke("ExplodeTracks", 3f);
+                index++;
+                randomNumber++;
+            }
+
+            // ORBS
+            OC.InstaceOrbs();
+            randomNumber = UnityEngine.Random.Range(0, 10);
+            foreach (Transform orbSpawn in OC.orbSpawns)
+            {
+                if (randomNumber == 10) randomNumber = 0;
+                GameObject orb = Instantiate(OC.orbPrefab, orbSpawn.position, orbSpawn.rotation);
+                orb.GetComponent<Orb>().trackAsignationForOrbe = randomNumber;
+                NetworkServer.Spawn(orb);
+                OC.orbes.Add(orb);
+                randomNumber++;
+            }
+        }
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
@@ -105,7 +145,8 @@ public class NetworkManagerCar : NetworkManager
             TextMobileConn.GetComponent<TextMeshProUGUI>().text = "Phone disconnected!";
             Invoke("DisableMobileText", 3f);
             //Kart.GetComponent<ArcadeKart>().hasPhoneConnected = false;
-        } else
+        }
+        else
         {
             if (calledConnected) return;
             calledConnected = true;
@@ -295,7 +336,8 @@ public class NetworkManagerCar : NetworkManager
     /// <summary>
     /// This is called when a server is stopped - including when a host is stopped.
     /// </summary>
-    public override void OnStopServer() {
+    public override void OnStopServer()
+    {
         //Kart.GetComponent< ArcadeKart >().hasPhoneConnected = false;
         TextMobileConn.SetActive(true);
         TextMobileConn.GetComponent<TextMeshProUGUI>().text = "Phone disconnected!";

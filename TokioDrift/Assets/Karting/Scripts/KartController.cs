@@ -54,11 +54,11 @@ public class KartController : NetworkBehaviour
         FinishLineTrigger = GameObject.Find("ConfettiTrigger").GetComponent<SimpleTrigger>();
         FinishLineTrigger.triggerBody = this.GetComponent<Rigidbody>();
         // track triggers
-        tracks = FindObjectsOfType<Track>();
-        foreach (Track track in tracks)
-        {
-            track.GetComponent<SimpleTrigger>().triggerBody = this.GetComponent<Rigidbody>();
-        }
+        //tracks = FindObjectsOfType<Track>();
+        //foreach (Track track in tracks)
+        //{
+        //    track.GetComponent<SimpleTrigger>().triggerBody = this.GetComponent<Rigidbody>();
+        //}
         // orb triggers
 
         gameManager = GameObject.Find("GameManager");

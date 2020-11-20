@@ -11,7 +11,7 @@ public class TrackController : NetworkBehaviour
 
     [Header("Spawns")]
     public Transform[] trackSpawns;
-    
+
     [Header("Tracks")]
     public Track[] tracks;
     public int randomNumber = 0;
@@ -43,15 +43,19 @@ public class TrackController : NetworkBehaviour
         }
     }
 
-    public void choose5Tracks()
+    public void prepareForInstance()
     {
-        CreateTracks();
+        tracks = new Track[10];
+    }
+
+    public void Explode3Tracks()
+    {
         Invoke("ExplodeTracks", 3f);
     }
 
     public void ExplodeTracks()
     {
-        //tracks = FindObjectsOfType<Track>();
+        tracks = FindObjectsOfType<Track>();
         foreach (Track track in tracks)
             track.ExplodeTrack();
     }
@@ -64,6 +68,6 @@ public class TrackController : NetworkBehaviour
         foreach (Track track in tracks)
             if (track != null && track.isRepaired)
                 track.TrackRepaired();
-            
+
     }
 }

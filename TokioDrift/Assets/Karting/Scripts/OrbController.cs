@@ -9,8 +9,8 @@ public class OrbController : NetworkBehaviour
     public Transform orbSpawn1;
     public Transform orbSpawn2;
     public Transform orbSpawn3;
-    public Transform orbSpawn4;
     public Transform orbSpawn5;
+    public Transform orbSpawn4;
     public Transform orbSpawn6;
     public Transform orbSpawn7;
     public Transform orbSpawn8;
@@ -27,6 +27,7 @@ public class OrbController : NetworkBehaviour
     public int randomNumber = 0;
     public bool auxAllOrbsCollected = true;
     public Track[] tracks;
+    public Orb[] orbs;
     //Cuando iniciamos el servidor: 
     //1)creamos los orb sgun el random
     //2)Asignamos su random
@@ -35,7 +36,14 @@ public class OrbController : NetworkBehaviour
 
     }
 
-    public void InstaceOrbs() {
+    public void SetOrbs()
+    {
+        //orbes = FindObjectsOfType<Orb>();
+        orbs = FindObjectsOfType<Orb>();
+    }
+
+    public void InstaceOrbs()
+    {
         orbSpawns.Add(orbSpawn1);
         orbSpawns.Add(orbSpawn2);
         orbSpawns.Add(orbSpawn3);
@@ -47,33 +55,8 @@ public class OrbController : NetworkBehaviour
         orbSpawns.Add(orbSpawn9);
         orbSpawns.Add(orbSpawn10);
         randomNumber = Random.Range(0, 10);
-        CreateOrbs();
+        // CreateOrbs();
     }
-
-    // this is called on the server
-    // [Command]
-    // void CmdFire()
-    // {
-    //     GameObject projectile = Instantiate(projectilePrefab, projectileMount.position, transform.rotation);
-    //     projectile.GetComponent<Projectile>().source = gameObject;
-    //     NetworkServer.Spawn(projectile);
-    //     RpcOnFire();
-    // }
-
-    [Server]
-    void CreateOrbs()
-    {
-        foreach (Transform orbSpawn in orbSpawns)
-        {
-            if (randomNumber == 10) randomNumber = 0;
-            GameObject orb = Instantiate(orbPrefab, orbSpawn.position, orbSpawn.rotation);
-            orb.GetComponent<Orb>().trackAsignationForOrbe = randomNumber;
-            NetworkServer.Spawn(orb);
-            orbes.Add(orb);
-            randomNumber++;
-        }
-    }
-
 
     // Start is called before the first frame update
     void Start()
@@ -90,10 +73,10 @@ public class OrbController : NetworkBehaviour
 
     void ActivateTrack(int trackAsignationForOrbe)
     {
-        if(tracks.Length == 0)
-            tracks = FindObjectsOfType<Track>();
-        foreach (Track track in tracks) 
-            if(track.TrackNumber == trackAsignationForOrbe)
+        //if (tracks.Length == 0)
+        tracks = FindObjectsOfType<Track>();
+        foreach (Track track in tracks)
+            if (track.TrackNumber == trackAsignationForOrbe)
                 track.MyOrbIsActive();
     }
 
@@ -101,16 +84,17 @@ public class OrbController : NetworkBehaviour
     void Update()
     {
         auxAllOrbsCollected = true;
-        foreach (GameObject orb in orbes)
+        foreach (Orb orb in orbs)
         {
-            if (orb != null && orb.GetComponent<Orb>().isCollected)
+            if (orb != null && orb.isCollected)
             {
-                ActivateTrack(orb.GetComponent<Orb>().trackAsignationForOrbe);
-                destroyOrd(orb);   
+                ActivateTrack(orb.trackAsignationForOrbe);
+                //destroyOrd(orb);
+                orb.DestroySelf();
                 auxAllOrbsCollected = false;
             }
-                
+
         }
-        if(auxAllOrbsCollected) allOrbsCollected = true;
+        if (auxAllOrbsCollected) allOrbsCollected = true;
     }
 }
