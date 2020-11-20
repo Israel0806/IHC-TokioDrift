@@ -5,7 +5,7 @@ using Mirror;
 
 public class OrbController : NetworkBehaviour
 {
-    [Header("Initial position orbs")]    
+    [Header("Initial position orbs")]
     public Transform orbSpawn1;
     public Transform orbSpawn2;
     public Transform orbSpawn3;
@@ -20,12 +20,13 @@ public class OrbController : NetworkBehaviour
 
     [Header("Prefab orbs")]
     public GameObject orbPrefab;
-    
+
     [Header("Values")]
-    public bool allOrbsCollected = false ;
+    public bool allOrbsCollected = false;
     public List<GameObject> orbes = new List<GameObject>();
     public int randomNumber = 0;
     public bool auxAllOrbsCollected = true;
+    public Track[] tracks;
     //Cuando iniciamos el servidor: 
     //1)creamos los orb sgun el random
     //2)Asignamos su random
@@ -49,7 +50,7 @@ public class OrbController : NetworkBehaviour
         CreateOrbs();
     }
 
-        // this is called on the server
+    // this is called on the server
     // [Command]
     // void CmdFire()
     // {
@@ -59,16 +60,16 @@ public class OrbController : NetworkBehaviour
     //     RpcOnFire();
     // }
 
-    [Command]
+    [Server]
     void CreateOrbs()
     {
         foreach (Transform orbSpawn in orbSpawns)
-        { 
-            if(randomNumber == 10) randomNumber = 0;
+        {
+            if (randomNumber == 10) randomNumber = 0;
             GameObject orb = Instantiate(orbPrefab, orbSpawn.position, orbSpawn.rotation);
             orb.GetComponent<Orb>().trackAsignationForOrbe = randomNumber;
             NetworkServer.Spawn(orb);
-            orbes.Add(orb);  
+            orbes.Add(orb);
             randomNumber++;
         }
     }
@@ -77,27 +78,36 @@ public class OrbController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //hasAuthority = true;
     }
-    
-    [Command]
+
+    [Server]
     void destroyOrd(GameObject orb)
     {
+        orbes.Remove(orb);
         NetworkServer.Destroy(orb);
-    } 
+    }
+
+    void ActivateTrack(int trackAsignationForOrbe)
+    {
+        if(tracks.Length == 0)
+            tracks = FindObjectsOfType<Track>();
+        foreach (Track track in tracks) 
+            if(track.TrackNumber == trackAsignationForOrbe)
+                track.MyOrbIsActive();
+    }
+
     // Update is called once per frame
     void Update()
     {
         auxAllOrbsCollected = true;
         foreach (GameObject orb in orbes)
         {
-            if (orb != null)
+            if (orb != null && orb.GetComponent<Orb>().isCollected)
             {
-                if (!orb.GetComponent<Orb>().isCollected)
-                {
-                    destroyOrd(orb);   
-                    auxAllOrbsCollected = false;
-                }
+                ActivateTrack(orb.GetComponent<Orb>().trackAsignationForOrbe);
+                destroyOrd(orb);   
+                auxAllOrbsCollected = false;
             }
                 
         }

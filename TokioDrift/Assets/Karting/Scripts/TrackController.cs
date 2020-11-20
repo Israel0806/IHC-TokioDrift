@@ -1,34 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class TrackController : MonoBehaviour
+
+public class TrackController : NetworkBehaviour
 {
-    public bool[] tracksDestroyed;
+    [Header("OrbController")]
+    public OrbController orbController;
+
+    [Header("Spawns")]
+    public Transform[] trackSpawns;
+    
+    [Header("Tracks")]
     public Track[] tracks;
+    public int randomNumber = 0;
+
+    [Header("Track Prefab")]
+    public GameObject trackPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
-        tracksDestroyed = new bool[10];
+        //tracksDestroyed = new bool[10];
+    }
+
+    [Server]
+    void CreateTracks()
+    {
+        int index = 0;
+        randomNumber = Random.Range(0, 10);
+        tracks = new Track[10];
+        foreach (Transform trackSpawn in trackSpawns)
+        {
+            if (randomNumber == 10) randomNumber = 0;
+            GameObject track = Instantiate(trackPrefab, trackSpawn.position, trackSpawn.rotation);
+            NetworkServer.Spawn(track);
+            tracks[index] = track.GetComponent<Track>();
+            tracks[index].TrackNumber = randomNumber;
+            index++;
+            randomNumber++;
+        }
     }
 
     public void choose5Tracks()
     {
-
-    }
-
-    public void Wait3ExplodeTracks()
-    {
+        CreateTracks();
         Invoke("ExplodeTracks", 3f);
     }
 
     public void ExplodeTracks()
     {
-        tracks = FindObjectsOfType<Track>();
+        //tracks = FindObjectsOfType<Track>();
         foreach (Track track in tracks)
-        {
             track.ExplodeTrack();
-        }
     }
 
 
@@ -36,6 +61,9 @@ public class TrackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        foreach (Track track in tracks)
+            if (track != null && track.isRepaired)
+                track.TrackRepaired();
+            
     }
 }

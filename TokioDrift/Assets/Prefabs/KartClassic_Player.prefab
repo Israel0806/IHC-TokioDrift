@@ -4714,7 +4714,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8959652842708129902}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e920355a973a27b45b91a65b3a7c9b81, type: 3}
+  m_Script: {fileID: 11500000, guid: 2be28a952d92e2d5baf813d1b6dcd73f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
@@ -4736,6 +4736,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   score: 0
+  TrackAssign: -1
 --- !u!135 &5021435037513267439
 SphereCollider:
   m_ObjectHideFlags: 0

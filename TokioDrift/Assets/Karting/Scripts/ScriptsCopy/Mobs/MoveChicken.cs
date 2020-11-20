@@ -8,22 +8,33 @@ using System.Diagnostics;
 public class MoveChicken : MonoBehaviour
 {
     public float[] Angles;
-    public GameObject Chicken;
+    GameObject Chicken;
     public float RayDistance = 1f;
-    public Animator ChickenAnimator;
-    public LayerMask TrackLayer;
-    public LayerMask PlayerLayer;
-    public float RunSpeed = 2;
+    Animator ChickenAnimator;
+    LayerMask TrackLayer;
+    LayerMask PlayerLayer;
+    public float RunSpeed;
     private bool CanRun = true;
     private bool Hitted = false;
-    public TextMeshProUGUI score;
+    TextMeshProUGUI score;
     public AudioClip DeathSound;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        Angles = new float[5];
+        Angles[0] = 0;
+        Angles[1] = 30;
+        Angles[2] = -30;
+        Angles[3] = 90;
+        Angles[4] = -90;
+        RunSpeed = 5f;
+        Chicken = gameObject;
+        score = GameObject.Find("TextScore").GetComponent<TextMeshProUGUI>();
+        TrackLayer = LayerMask.GetMask("Track");
+        PlayerLayer = LayerMask.GetMask("Kart");
+        ChickenAnimator = this.GetComponent<Animator>();
     }
 
     // Update is called once per frame

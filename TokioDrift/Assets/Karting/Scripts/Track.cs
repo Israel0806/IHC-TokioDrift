@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Track : MonoBehaviour
+public class Track : NetworkBehaviour
 {
     public Material mMaterial;
     public GameObject fires;
     public GameObject beacon;
     public GameObject explosion;
-
+    public int TrackNumber;
+    public bool isRepaired;
 
     public void ExplodeTrack()
     {
@@ -20,7 +22,7 @@ public class Track : MonoBehaviour
         explosion.SetActive(true);
         explosion.GetComponent<ParticleSystem>().Play();
         //explosion.GetComponent<ParticleSystem>().loop = false;
-        Invoke("setOffExplosion", 2.0f);
+        Invoke("setOffExplosion", 2.0f); // because i dont know how to stop it
     }
 
     void setOffExplosion()
@@ -28,30 +30,31 @@ public class Track : MonoBehaviour
         explosion.SetActive(false);
     }
 
-    void MyOrbIsActive()
+    public void MyOrbIsActive()
     {
         beacon.SetActive(true);
     }
 
-    void TrackRepaired()
+    public void TrackRepaired()
     {
         fires.SetActive(false);
         beacon.SetActive(false);
     }
 
-    public void checkIfRepaired()
-    {
-
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        isRepaired = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    [ServerCallback]
+    void OnTriggerEnter(Collider co)
     {
-
+        //Hit another player
+        if (co.tag.Equals("Player") && co.GetComponent<KartController>().TrackAssign == TrackNumber)
+        {
+            isRepaired = true;
+            co.GetComponent<KartController>().TrackAssign = -1;
+        }
     }
 }

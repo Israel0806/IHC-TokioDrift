@@ -32,19 +32,16 @@ public class Orb : NetworkBehaviour
     }
     */
     [ServerCallback]
-        void OnTriggerEnter(Collider co)
+    void OnTriggerEnter(Collider co)
+    {
+        //Hit another player
+        if (co.tag.Equals("Player") && co.GetComponent<KartController>().TrackAssign == -1 )
         {
-            //Hit another player
-            if (co.tag.Equals("Player") )
-            {
-                //set the tracker corresponce  
-                co.GetComponent<KartController>().TrackAssign = trackAsignationForOrbe;
+            //set the tracker corresponce  
+            co.GetComponent<KartController>().TrackAssign = trackAsignationForOrbe;
+            isCollected = true;
 
-                //update score on source
-                //source.GetComponent<Tank>().score += damage;
-            }
-
-            NetworkServer.Destroy(gameObject);//verificar si lo destruye doble vez
         }
+    }
 
 }

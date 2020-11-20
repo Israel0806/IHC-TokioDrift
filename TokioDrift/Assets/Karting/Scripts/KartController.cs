@@ -17,7 +17,6 @@ public class KartController : NetworkBehaviour
     private Minimap _Minimap;
     private SimpleTrigger FinishLineTrigger;
     private GameObject gameManager;
-    private bool gameStarted;
 
     private Track[] tracks;
     private Orb[] orbs;
@@ -72,7 +71,6 @@ public class KartController : NetworkBehaviour
         camera.m_Follow = this.transform;
         camera.m_LookAt = this.transform;
 
-        gameStarted = false;
         arcadeKart.SetCanMove(false);
     }
     #endregion

@@ -21,11 +21,8 @@ public class NetworkManagerCar : NetworkManager
     public Transform playerSpawn1;
     public Transform playerSpawn2;
 
-    private bool gameStarted;
     private GameObject gameManager;
 
-    //public CinemachineVirtualCamera cinematicCamera;
-    //public GameObject Kart;
     public GameObject TextMobileConn;
 
     public void DisableMobileText()
@@ -37,20 +34,16 @@ public class NetworkManagerCar : NetworkManager
     {
         calledConnected = true;
         calledNotConnected = false;
+
         //TextMobileConn.SetActive(true);
         //TextMobileConn.GetComponent<TextMeshProUGUI>().color = Color.green;
         //TextMobileConn.GetComponent<TextMeshProUGUI>().text = "Phone connected!";
+
         Invoke("DisableMobileText", 3f);
         //Kart.GetComponent<ArcadeKart>().hasPhoneConnected = true;
         Transform trans = numPlayers == 0 ? playerSpawn1 : playerSpawn2;
         GameObject player = Instantiate(playerPrefab, trans.position, trans.rotation);
         NetworkServer.AddPlayerForConnection(conn, player);
-
-        /// follow camera
-        //conn.identity.GetComponent<
-        //cinematicCamera.m_Follow = player.transform;
-        //cinematicCamera.m_LookAt = player.transform;
-        //print(conn.identity.transform);
 
         /// Steam connection
         CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
@@ -89,7 +82,6 @@ public class NetworkManagerCar : NetworkManager
     public override void Start()
     {
         gameManager = GameObject.Find("GameManager");
-        gameStarted = false;
 
         calledNotConnected = false;
         calledConnected = false;

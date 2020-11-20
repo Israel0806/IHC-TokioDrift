@@ -93,7 +93,7 @@ public class GameFlowManager : MonoBehaviour
         StartCoroutine(ShowObjectivesRoutine());
 
         StartCoroutine(CountdownThenStartRaceRoutine());
-        TC.Wait3ExplodeTracks();
+        TC.choose5Tracks();
         OC.InstaceOrbs();
     }
 
