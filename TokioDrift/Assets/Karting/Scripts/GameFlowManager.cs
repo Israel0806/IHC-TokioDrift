@@ -54,6 +54,7 @@ public class GameFlowManager : MonoBehaviour
     [Header("Track manager")]
     bool isGameReady;
     public TrackController TC;
+    public OrbController OC;
 
     void Start()
     {
@@ -93,6 +94,7 @@ public class GameFlowManager : MonoBehaviour
 
         StartCoroutine(CountdownThenStartRaceRoutine());
         TC.Wait3ExplodeTracks();
+        OC.InstaceOrbs();
     }
 
     IEnumerator CountdownThenStartRaceRoutine() {

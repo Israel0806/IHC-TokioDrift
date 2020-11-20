@@ -39,6 +39,11 @@ public class Track : MonoBehaviour
         beacon.SetActive(false);
     }
 
+    public void checkIfRepaired()
+    {
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {

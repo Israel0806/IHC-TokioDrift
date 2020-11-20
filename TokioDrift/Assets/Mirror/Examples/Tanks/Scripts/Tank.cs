@@ -75,7 +75,7 @@ namespace Mirror.Examples.Tanks
             GameObject projectile = Instantiate(projectilePrefab, projectileMount.position, transform.rotation);
             projectile.GetComponent<Projectile>().source = gameObject;
             NetworkServer.Spawn(projectile);
-            RpcOnFire();
+            //RpcOnFire();
         }
 
         // this is called on the tank that fired for all observers
