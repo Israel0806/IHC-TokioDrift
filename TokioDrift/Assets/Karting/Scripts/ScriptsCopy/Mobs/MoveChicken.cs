@@ -4,6 +4,7 @@ using System.Globalization;
 using UnityEngine;
 using TMPro;
 using System.Diagnostics;
+using KartGame.KartSystems;
 
 public class MoveChicken : MonoBehaviour
 {
@@ -60,21 +61,30 @@ public class MoveChicken : MonoBehaviour
                 this.transform.Rotate(0f, 180f , 0f, Space.World);
             // hitted by the player
             if (!Hitted && Physics.Raycast(origin, direction, out hit, RayDistance, PlayerLayer)) {
-                if (DeathSound)
-                {
-                    AudioUtility.CreateSFX(DeathSound, transform.position, AudioUtility.AudioGroups.Collision, 0f);
-                }
 
+
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider co)
+    {
+        if (co.tag.Equals("Player"))
+        {
+            if (DeathSound)
+                AudioUtility.CreateSFX(DeathSound, transform.position, AudioUtility.AudioGroups.Collision, 0f);
+            if (co.GetComponent<ArcadeKart>().isLocalPlayer)
+            {
                 float _score = int.Parse(score.text);
                 score.text = (_score + 100).ToString();
-
-                Hitted = true;
-                CanRun = false;
-                this.transform.localScale += new Vector3(3f, 0f, -1f);
-                this.transform.Rotate(0f, -180f, 0f, Space.World);
-                this.transform.Rotate(-90f, 0f, 0f, Space.World);
-                Invoke("KillChicken", 3);
             }
+
+            Hitted = true;
+            CanRun = false;
+            this.transform.localScale += new Vector3(3f, 0f, -1f);
+            this.transform.Rotate(0f, -180f, 0f, Space.World);
+            this.transform.Rotate(-90f, 0f, 0f, Space.World);
+            Invoke("KillChicken", 3);
         }
     }
 

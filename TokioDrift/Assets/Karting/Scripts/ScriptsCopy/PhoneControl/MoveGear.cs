@@ -99,6 +99,7 @@ public class MoveGear : NetworkBehaviour
                 speedText.text = "0";
         } catch(Exception e)
         {
+            print("Error: " + e.Message);
             print("Object has already been deleted");
         }
     }

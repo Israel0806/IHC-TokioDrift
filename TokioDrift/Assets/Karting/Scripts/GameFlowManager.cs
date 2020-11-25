@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 using KartGame.KartSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 //using Mirror;
 
 public enum GameState { Play, Won, Lost }
@@ -45,19 +46,29 @@ public class GameFlowManager : MonoBehaviour
     public ArcadeKart playerKart;
 
     public ArcadeKart[] karts;
+    
+
     ObjectiveManager m_ObjectiveManager;
     TimeManager m_TimeManager;
     float m_TimeLoadEndGameScene;
     string m_SceneToLoad;
     float elapsedTimeBeforeEndScene = 0;
 
+    [Header("Managing state of game")]
+    public int gamePhase;
+
+    [Header("DisplayMessage")]
+    public DisplayMessage displayMessage;
+
     [Header("Track manager")]
     bool isGameReady;
     public TrackController TC;
     public OrbController OC;
+    public KartController[] kartsControllers;
 
     void Start()
     {
+        gamePhase = 0;
         isGameReady = false;
         //if (playerKart == null) return;
         if (autoFindKarts)
@@ -93,8 +104,19 @@ public class GameFlowManager : MonoBehaviour
         StartCoroutine(ShowObjectivesRoutine());
 
         StartCoroutine(CountdownThenStartRaceRoutine());
-        TC.Explode3Tracks();
-        OC.SetOrbs();
+
+        // build tracks and orbs
+        kartsControllers = FindObjectsOfType<KartController>();
+        foreach (KartController kart in kartsControllers)
+        {
+            if (kart.isHost)
+            {
+                TC.SelectTracks(kart.randOrbNumber);
+                OC.CreateOrbs(kart.randTrackNumber);
+                break;
+            }
+        }
+        //Hostkart.setRandNumbers();
         //TC.choose5Tracks();
         //OC.InstaceOrbs();
     }
@@ -172,8 +194,18 @@ public class GameFlowManager : MonoBehaviour
         }
     }
 
+    void EnterCompetitive()
+    {
+        displayMessage.message = "Compete against the other player to win!";
+    }
+
     void EndGame(bool win)
     {
+        if(gamePhase == 0)
+        {
+            EnterCompetitive();
+            return;
+        }
         // Shutdown server for phone
         endGame.text = "1";
         //NetworkManager.GetComponent<TurnItOff>().StopServer();

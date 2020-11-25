@@ -21,10 +21,11 @@ public class NetworkManagerCar : NetworkManager
     public Transform playerSpawn1;
     public Transform playerSpawn2;
 
-    [Header("Track manager")]
+    [Header("Managers")]
     bool isGameReady;
     public TrackController TC;
     public OrbController OC;
+    //public GameFlowManager flowManager;
 
 
     private GameObject gameManager;
@@ -50,6 +51,8 @@ public class NetworkManagerCar : NetworkManager
         Transform trans = numPlayers == 0 ? playerSpawn1 : playerSpawn2;
         GameObject player = Instantiate(playerPrefab, trans.position, trans.rotation);
         NetworkServer.AddPlayerForConnection(conn, player);
+        if (numPlayers == 1)
+            player.GetComponent<KartController>().isHost = true;
 
         /// Steam connection
         CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
@@ -59,40 +62,41 @@ public class NetworkManagerCar : NetworkManager
         var playerInfoDisplay = conn.identity.GetComponent<PlayerInfoDisplay>();
 
         playerInfoDisplay.SetSteamId(steamId.m_SteamID);
-        if (numPlayers == 1)
-        {
-            print("si");
-            /// TRACKS
-            int randomNumber = 0;
-            int index = 0;
-            randomNumber = UnityEngine.Random.Range(0, 10);
-            TC.prepareForInstance();
-            foreach (Transform trackSpawn in TC.trackSpawns)
-            {
-                if (randomNumber == 10) randomNumber = 0;
-                GameObject track = Instantiate(TC.trackPrefab, trackSpawn.position, trackSpawn.rotation);
-                NetworkServer.Spawn(track);
-                TC.tracks[index] = track.GetComponent<Track>();
-                TC.tracks[index].TrackNumber = randomNumber;
 
-                // TC.Invoke("ExplodeTracks", 3f);
-                index++;
-                randomNumber++;
-            }
+        //if (numPlayers == 2)
+        //{
+            //flowManager.Hostkart
+            ///// TRACKS
+            //int randomNumber = 0;
+            //int index = 0;
+            //randomNumber = UnityEngine.Random.Range(0, 10);
+            //TC.prepareForInstance();
+            //foreach (Transform trackSpawn in TC.trackSpawns)
+            //{
+            //    if (randomNumber == 10) randomNumber = 0;
+            //    GameObject track = Instantiate(TC.trackPrefab, trackSpawn.position, trackSpawn.rotation);
+            //    NetworkServer.Spawn(track);
+            //    TC.tracks[index] = track.GetComponent<Track>();
+            //    TC.tracks[index].TrackNumber = randomNumber;
 
-            // ORBS
-            OC.InstaceOrbs();
-            randomNumber = UnityEngine.Random.Range(0, 10);
-            foreach (Transform orbSpawn in OC.orbSpawns)
-            {
-                if (randomNumber == 10) randomNumber = 0;
-                GameObject orb = Instantiate(OC.orbPrefab, orbSpawn.position, orbSpawn.rotation);
-                orb.GetComponent<Orb>().trackAsignationForOrbe = randomNumber;
-                NetworkServer.Spawn(orb);
-                OC.orbes.Add(orb);
-                randomNumber++;
-            }
-        }
+            //    // TC.Invoke("ExplodeTracks", 3f);
+            //    index++;
+            //    randomNumber++;
+            //}
+
+            //// ORBS
+            //OC.InstaceOrbs();
+            //randomNumber = UnityEngine.Random.Range(0, 10);
+            //foreach (Transform orbSpawn in OC.orbSpawns)
+            //{
+            //    if (randomNumber == 10) randomNumber = 0;
+            //    GameObject orb = Instantiate(OC.orbPrefab, orbSpawn.position, orbSpawn.rotation);
+            //    orb.GetComponent<Orb>().trackAsignationForOrbe = randomNumber;
+            //    NetworkServer.Spawn(orb);
+            //    OC.orbes.Add(orb);
+            //    randomNumber++;
+            //}
+        //}
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)

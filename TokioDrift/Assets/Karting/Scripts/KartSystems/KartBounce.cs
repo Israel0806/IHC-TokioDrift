@@ -71,11 +71,14 @@ namespace KartGame.KartSystems
                         return;
                     }
 
-                    float _score = float.Parse(score.text);
-                    _score = _score - 10;
-                    if (_score <= 0)
-                        _score = 0;
-                    score.text = _score.ToString();
+                    if(this.GetComponent<ArcadeKart>().isLocalPlayer)
+                    {
+                        float _score = float.Parse(score.text);
+                        _score = _score - 10;
+                        if (_score <= 0)
+                            _score = 0;
+                        score.text = _score.ToString();
+                    }
 
                     // Calculate the incident vector of the kart colliding into whatever object
                     Vector3 incidentVector =  hit.point - origin;

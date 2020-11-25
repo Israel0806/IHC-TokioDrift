@@ -718,7 +718,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 16760}
     - Class: 114
-      Script: {instanceID: 31102}
+      Script: {instanceID: 30176}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 137
@@ -797,15 +797,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 16760}
     - Class: 114
-      Script: {instanceID: 24338}
+      Script: {instanceID: 29894}
     - Class: 114
-      Script: {instanceID: 30840}
+      Script: {instanceID: 29896}
     - Class: 114
-      Script: {instanceID: 30842}
+      Script: {instanceID: 29898}
     - Class: 114
-      Script: {instanceID: 30844}
+      Script: {instanceID: 29900}
     - Class: 114
-      Script: {instanceID: 30846}
+      Script: {instanceID: 29930}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -1855,7 +1855,7 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
-      Hash: d6274f80acf51c5f20d9771f3315c53e
+      Hash: 4e57e0f50e0f1e48785e3db5913db71e
     assemblyName: KartGame.dll
     namespaceName: 
     className: OrbController
