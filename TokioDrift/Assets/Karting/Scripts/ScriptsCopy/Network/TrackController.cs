@@ -9,9 +9,6 @@ public class TrackController : MonoBehaviour
     [Header("OrbController")]
     public OrbController orbController;
 
-    [Header("Spawns")]
-    public Transform[] trackSpawns;
-
     [Header("Tracks")]
     public Track[] tracks;
     //public int randomNumber = 0;
@@ -31,20 +28,21 @@ public class TrackController : MonoBehaviour
         //tracks = new Track[10];
         Track[] AllTracks;
         AllTracks = FindObjectsOfType<Track>();
-
-        int[10] tracksSelected; // index of tracks selected
+        tracks = new Track[10];
+        int[] tracksSelected = new int[10]; // index of tracks selected
         int tracksSelectedIndex = 0; 
         for (int index = 0; index < 10; ++index) {
+            if (index > AllTracks.Length) break;
             if (randomNumber == 10) randomNumber = 0;
-            randomTrack = Random.Range(0, AllTracks.Length); /// elegir un track al azar
+            randomTrack = UnityEngine.Random.Range(0, AllTracks.Length); /// elegir un track al azar
             
             /// check if track has already been selected
             for(int i = 0; i < tracksSelectedIndex; ++i )
             {
 
-                if(RandomTrack = tracksSelected[i])
+                if(randomTrack == tracksSelected[i])
                 {
-                    randomTrack = Random.Range(0, AllTracks.Length);
+                    randomTrack = UnityEngine.Random.Range(0, AllTracks.Length);
                     i = 0;
                 }
             }

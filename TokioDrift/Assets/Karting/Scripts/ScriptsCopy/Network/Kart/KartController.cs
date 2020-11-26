@@ -84,6 +84,7 @@ public class KartController : NetworkBehaviour
 
         randOrbNumber = Random.Range(0, 10);
         randTrackNumber = Random.Range(0, 10);
+
         TrackAssign = -1;
 
         arcadeKart.SetCanMove(false);

@@ -107,6 +107,7 @@ public class GameFlowManager : MonoBehaviour
 
         // build tracks and orbs
         kartsControllers = FindObjectsOfType<KartController>();
+
         foreach (KartController kart in kartsControllers)
         {
             if (kart.isHost)
@@ -116,9 +117,6 @@ public class GameFlowManager : MonoBehaviour
                 break;
             }
         }
-        //Hostkart.setRandNumbers();
-        //TC.choose5Tracks();
-        //OC.InstaceOrbs();
     }
 
     IEnumerator CountdownThenStartRaceRoutine()

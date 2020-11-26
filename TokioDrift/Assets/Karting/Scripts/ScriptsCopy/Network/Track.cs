@@ -23,9 +23,12 @@ public class Track : MonoBehaviour
 
     public void ExplodeTrack()
     {
-        Color color = mMaterial.color;
-        color.a = Mathf.Clamp(0.5f, 0, 1);
-        mMaterial.color = color;
+        if(mMaterial)
+        {
+            Color color = mMaterial.color;
+            color.a = Mathf.Clamp(0.5f, 0, 1);
+            mMaterial.color = color;
+        }
         fires.SetActive(true);
         
         explosion.SetActive(true);
