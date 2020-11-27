@@ -69,14 +69,14 @@ public class GameFlowManager : MonoBehaviour
     bool isGameReady;
     public TrackController TC;
     public OrbController OC;
-    public KartController[] kartsControllers;
+    //public KartController[] kartsControllers;
     
    
     void Start()
     {
         //initialize the text 
-        textScore1 = GameObject.Find("TextScore1").GetComponent<TextMeshProUGUI>();
-        textScore2 = GameObject.Find("TextScore2").GetComponent<TextMeshProUGUI>();
+        //textScore1 = GameObject.Find("TextScore1").GetComponent<TextMeshProUGUI>();
+        //textScore2 = GameObject.Find("TextScore2").GetComponent<TextMeshProUGUI>();
         gamePhase = 0;
         isGameReady = false;
         //if (playerKart == null) return;
@@ -115,18 +115,19 @@ public class GameFlowManager : MonoBehaviour
         StartCoroutine(CountdownThenStartRaceRoutine());
 
         // build tracks and orbs
-        kartsControllers = FindObjectsOfType<KartController>();
+        //kartsControllers = FindObjectsOfType<KartController>();
 
-        foreach (KartController kart in kartsControllers)
+        foreach (ArcadeKart kart in karts)
         {
+
             if (kart.isHost)
             {
                 TC.SelectTracks(kart.randOrbNumber);
                 OC.CreateOrbs(kart.randTrackNumber);
-                Score1 =  kart.score;
+                //Score1 =  kart.score;
                 break;
             }else{
-                Score2 =  kart.score;
+                //Score2 =  kart.score;
                 break;
             }
         }
@@ -187,52 +188,60 @@ public class GameFlowManager : MonoBehaviour
                     gameState = GameState.Play;
                 }
             }
-            //update the score of both players and send this data 
-            //kartsControllers = FindObjectsOfType<KartController>();
-            foreach (KartController kart in kartsControllers)
-            {
-                if (kart.isHost)
-                {
-                    Score1 =  kart.score;
-                }else{
-                    Score2 =  kart.score;
-                }
-            }
-
-            foreach (KartController kart in kartsControllers)
-            {
-                if (kart.isHost)
-                {
-                    kart.scoreOtherPlayer = Score2;
-                }else{
-                    kart.scoreOtherPlayer = Score1;
-                }
-            }
-            //Write in the interface the scores of both playrs
-            foreach (KartController kart in kartsControllers)
-            {
-                if (kart.isHost)
-                {
-                    textScore1.text = (Score1).ToString(); 
-                    textScore2.text = (Score2).ToString(); 
-                    break;
-                }else{
-                    textScore1.text = (Score2).ToString(); 
-                    textScore2.text = (Score1).ToString(); 
-                    break;
-                }
-            }
-
         }
         else
         {
             karts = FindObjectsOfType<ArcadeKart>();
-            if (karts.Length == 1 && !isGameReady)
+            if (karts.Length == 2 && !isGameReady)
             {
                 isGameReady = true;
                 gameState = GameState.Play;
-                GameReady();
+                Invoke("GameReady",1.0f);
             }
+
+            //update the score of both players and send this data 
+            //kartsControllers = FindObjectsOfType<KartController>();
+            foreach (ArcadeKart kart in karts)
+            {
+                if (kart.isHost)
+                {
+                    Score1 = kart.score;
+                }
+                else
+                {
+                    Score2 = kart.score;
+                }
+            }
+
+            foreach (ArcadeKart kart in karts)
+            {
+                if (kart.isHost)
+                {
+                    kart.scoreOtherPlayer = Score2;
+                }
+                else
+                {
+                    kart.scoreOtherPlayer = Score1;
+                }
+            }
+            //Write in the interface the scores of both playrs
+            foreach (ArcadeKart kart in karts)
+            {
+                if (kart.isHost)
+                {
+                    textScore1.text = (Score1).ToString();
+                    textScore2.text = (Score2).ToString();
+                    break;
+                }
+                else
+                {
+                    textScore1.text = (Score2).ToString();
+                    textScore2.text = (Score1).ToString();
+                    break;
+                }
+            }
+
+
             if (m_ObjectiveManager.AreAllObjectivesCompleted())
                 EndGame(true);
 
@@ -243,6 +252,7 @@ public class GameFlowManager : MonoBehaviour
 
     void EnterCompetitive()
     {
+        //gamePhase == 1;
         displayMessage.message = "Compete against the other player to win!";
     }
 

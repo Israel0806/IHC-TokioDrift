@@ -71,13 +71,14 @@ public class MoveChicken : MonoBehaviour
     {
         if (co.tag.Equals("Player"))
         {
+            print("Player has touched");
             if (DeathSound)
                 AudioUtility.CreateSFX(DeathSound, transform.position, AudioUtility.AudioGroups.Collision, 0f);
             if (co.GetComponent<ArcadeKart>().isLocalPlayer)
             {
-                float _score = int.Parse(score.text);
-                score.text = (_score + 100).ToString();
-                co.GetComponent<KartController>().score += 10;
+                //float _score = int.Parse(score.text);
+                //score.text = (_score + 100).ToString();
+                co.GetComponent<KartController>().score += 100;
             }
 
             Hitted = true;

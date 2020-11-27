@@ -75,16 +75,21 @@ public class KartController : NetworkBehaviour
 
         gameManager = GameObject.Find("GameManager");
 
+        randOrbNumber = Random.Range(0, 10);
+        randTrackNumber = Random.Range(0, 10);
         /// Kart
         arcadeKart = this.GetComponent<ArcadeKart>();
         arcadeKart.isLocalPlayer = true;
+
+        //arcadeKart.isHost = true;
+        arcadeKart.randOrbNumber = randOrbNumber;
+        arcadeKart.randTrackNumber = randTrackNumber;
+        
 
         _Minimap.player = this.transform;
         camera.m_Follow = this.transform;
         camera.m_LookAt = this.transform;
 
-        randOrbNumber = Random.Range(0, 10);
-        randTrackNumber = Random.Range(0, 10);
 
         TrackAssign = -1;
 
@@ -96,7 +101,13 @@ public class KartController : NetworkBehaviour
     [Client]
     void Update()
     {
+        if(isHost)
+            arcadeKart.isHost = true;
+
         if (!isLocalPlayer) return;
+
+        if (score < 0)
+            score = 0;
 
         if(TrackAssign != -1)
             orb.SetActive(true);

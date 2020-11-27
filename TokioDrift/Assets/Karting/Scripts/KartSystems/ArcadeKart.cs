@@ -150,12 +150,21 @@ namespace KartGame.KartSystems
         private float freno;
 
         public bool isLocalPlayer;
+        public bool isHost;
+        public int randOrbNumber;
+        public int randTrackNumber;
+        public int score;
+        public int scoreOtherPlayer;
+
 
 
         void Awake()
         {
-            hasPhoneConnected = false;
+            score = 0;
+            isHost = false;
+            scoreOtherPlayer = 0;
             isLocalPlayer = false;
+            hasPhoneConnected = false;
 
             Rigidbody = GetComponent<Rigidbody>();
             m_Inputs = GetComponents<IInput>();
