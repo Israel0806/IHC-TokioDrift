@@ -29,7 +29,8 @@ public class KartController : NetworkBehaviour
 
     [Header("Game Stats")]
     [SyncVar]
-    public int score;
+    public int score = 0;
+    public int scoreOtherPlayer = 0; 
 
     //El objeto orbe le asigana al juegador el track que debe ir  a conseguir
     public int TrackAssign = -1;

@@ -77,6 +77,7 @@ public class MoveChicken : MonoBehaviour
             {
                 float _score = int.Parse(score.text);
                 score.text = (_score + 100).ToString();
+                co.GetComponent<KartController>().score += 10;
             }
 
             Hitted = true;

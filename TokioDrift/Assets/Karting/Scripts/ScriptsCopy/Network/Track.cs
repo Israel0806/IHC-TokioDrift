@@ -73,7 +73,7 @@ public class Track : MonoBehaviour
         {
             isRepaired = true;
             co.GetComponent<KartController>().TrackAssign = -1;
-
+            co.GetComponent<KartController>().score += 40; // if it is repair, plus
             if (CollectSound)
                 AudioUtility.CreateSFX(CollectSound, transform.position, AudioUtility.AudioGroups.Pickup, 0f);
             
@@ -83,6 +83,8 @@ public class Track : MonoBehaviour
             StartCoroutine(StartEffect(3, 0.3f));
             StartCoroutine(StartEffect(4, 0.4f));
             StartCoroutine(StartEffect(5, 0.5f));
+        }else{
+            co.GetComponent<KartController>().score -= 15;// if not correspond to pass there
         }
     }
 }

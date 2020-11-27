@@ -25,6 +25,8 @@ public class NetworkManagerCar : NetworkManager
     bool isGameReady;
     public TrackController TC;
     public OrbController OC;
+    public int Score1;
+    public int Score2;
     //public GameFlowManager flowManager;
 
 
@@ -54,6 +56,12 @@ public class NetworkManagerCar : NetworkManager
         if (numPlayers == 1)
             player.GetComponent<KartController>().isHost = true;
 
+        //On start we equal scores
+        /*if(player.GetComponent<KartController>().isHost){
+           Score1 =  player.GetComponent<KartController>().score; 
+        }else{
+           Score2 =  player.GetComponent<KartController>().score; 
+        }*/
         /// Steam connection
         CSteamID steamId = SteamMatchmaking.GetLobbyMemberByIndex(
             SteamLobby.LobbyID,

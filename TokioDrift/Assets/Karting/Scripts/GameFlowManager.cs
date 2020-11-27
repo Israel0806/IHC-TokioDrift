@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 using KartGame.KartSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 //using Mirror;
 
@@ -11,6 +12,8 @@ public enum GameState { Play, Won, Lost }
 
 public class GameFlowManager : MonoBehaviour
 {
+    public TextMeshProUGUI textScore1;
+    public TextMeshProUGUI textScore2;
     [Header("Parameters")]
     [Tooltip("Duration of the fade-to-black at the end of the game")]
     public float endSceneLoadDelay = 3f;
@@ -47,6 +50,8 @@ public class GameFlowManager : MonoBehaviour
 
     public ArcadeKart[] karts;
     
+    public int Score1;
+    public int Score2;
 
     ObjectiveManager m_ObjectiveManager;
     TimeManager m_TimeManager;
@@ -65,9 +70,13 @@ public class GameFlowManager : MonoBehaviour
     public TrackController TC;
     public OrbController OC;
     public KartController[] kartsControllers;
-
+    
+   
     void Start()
     {
+        //initialize the text 
+        textScore1 = GameObject.Find("TextScore1").GetComponent<TextMeshProUGUI>();
+        textScore2 = GameObject.Find("TextScore2").GetComponent<TextMeshProUGUI>();
         gamePhase = 0;
         isGameReady = false;
         //if (playerKart == null) return;
@@ -114,6 +123,10 @@ public class GameFlowManager : MonoBehaviour
             {
                 TC.SelectTracks(kart.randOrbNumber);
                 OC.CreateOrbs(kart.randTrackNumber);
+                Score1 =  kart.score;
+                break;
+            }else{
+                Score2 =  kart.score;
                 break;
             }
         }
@@ -174,6 +187,42 @@ public class GameFlowManager : MonoBehaviour
                     gameState = GameState.Play;
                 }
             }
+            //update the score of both players and send this data 
+            //kartsControllers = FindObjectsOfType<KartController>();
+            foreach (KartController kart in kartsControllers)
+            {
+                if (kart.isHost)
+                {
+                    Score1 =  kart.score;
+                }else{
+                    Score2 =  kart.score;
+                }
+            }
+
+            foreach (KartController kart in kartsControllers)
+            {
+                if (kart.isHost)
+                {
+                    kart.scoreOtherPlayer = Score2;
+                }else{
+                    kart.scoreOtherPlayer = Score1;
+                }
+            }
+            //Write in the interface the scores of both playrs
+            foreach (KartController kart in kartsControllers)
+            {
+                if (kart.isHost)
+                {
+                    textScore1.text = (Score1).ToString(); 
+                    textScore2.text = (Score2).ToString(); 
+                    break;
+                }else{
+                    textScore1.text = (Score2).ToString(); 
+                    textScore2.text = (Score1).ToString(); 
+                    break;
+                }
+            }
+
         }
         else
         {
