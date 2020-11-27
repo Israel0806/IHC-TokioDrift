@@ -9,6 +9,10 @@ using KartGame.KartSystems;
 	API Reference: https://mirror-networking.com/docs/api/Mirror.NetworkBehaviour.html
 */
 
+/*
+    Instaciar los objetos en ambos jugadores pasando el random por ahi.
+*/
+
 public class KartController : NetworkBehaviour
 {
     private ArcadeKart arcadeKart;
@@ -30,11 +34,28 @@ public class KartController : NetworkBehaviour
     [Header("Game Stats")]
     [SyncVar]
     public int score = 0;
+    [SyncVar]
     public int scoreOtherPlayer = 0; 
+    //scroes with the video
 
     //El objeto orbe le asigana al juegador el track que debe ir  a conseguir
     public int TrackAssign = -1;
 
+    /*
+    public override void OnStartServer()
+    {
+        PrandOrbNumber = Random.Range(0, 10);
+        PrandTrackNumber = Random.Range(0, 10);
+        RpcOnFire(PrandOrbNumber,PrandTrackNumber);
+    }
+
+    [ClientRpc]
+    void RpcOnFire(PrandOrbNumber,PrandTrackNumber)
+    {
+        randOrbNumber = PrandOrbNumber;
+        randTrackNumber = PrandTrackNumber;
+    }
+    */
 
     #region Start & Stop Callbacks
 
@@ -77,6 +98,8 @@ public class KartController : NetworkBehaviour
 
         randOrbNumber = Random.Range(0, 10);
         randTrackNumber = Random.Range(0, 10);
+        
+        
         /// Kart
         arcadeKart = this.GetComponent<ArcadeKart>();
         arcadeKart.isLocalPlayer = true;
@@ -101,8 +124,7 @@ public class KartController : NetworkBehaviour
     [Client]
     void Update()
     {
-        if(isHost)
-            arcadeKart.isHost = true;
+        if(isHost) arcadeKart.isHost = true;
 
         if (!isLocalPlayer) return;
 
@@ -114,7 +136,7 @@ public class KartController : NetworkBehaviour
         else
             orb.SetActive(false);
 
-}
+    }
 
 
 }

@@ -6,6 +6,11 @@ using System;
 
 public class TrackController : MonoBehaviour
 {
+    //Some references
+    [Header("Reference of comuncication")]
+    [SerializeField] private Track instanceOfCE= null;
+    
+    
     [Header("OrbController")]
     public OrbController orbController;
 
@@ -51,6 +56,8 @@ public class TrackController : MonoBehaviour
 
             tracks[index] = AllTracks[randomTrack].GetComponent<Track>();
             tracks[index].TrackNumber = randomNumber;
+            tracks[index].identification = randomNumber;
+
             randomNumber++;
         }
 
@@ -91,6 +98,24 @@ public class TrackController : MonoBehaviour
         foreach (Track track in tracks)
             if (track != null && track.isRepaired)
                 track.TrackRepaired();
+                
 
     }
+
+    private void onEnable()
+    {
+        instanceOfCE.EventChangeSomeTrack += HandleChangeOfTrack;
+    }
+
+    private void onDisable()
+    { 
+        instanceOfCE.EventChangeSomeTrack -= HandleChangeOfTrack;
+    }
+
+    private void HandleChangeOfTrack(int iden, bool state)
+    {
+         foreach (Track track in tracks)
+            if (track != null && track.identification == iden  && state)
+                track.TrackRepaired();
+    }    
 }

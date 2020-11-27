@@ -3,23 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Track : MonoBehaviour
+public class Track : NetworkBehaviour
 {
     public Material mMaterial;
     public GameObject fires;
     public GameObject beacon;
     public GameObject explosion;
     public GameObject[] effects;
+    public int identification;
 
     public int TrackNumber;
 
     public AudioClip CollectSound;
     public bool isRepaired;
 
+
+    public delegate void ChangeSomeTrack(int changeTrack, bool state);
+
+    [SyncEvent]
+    public event ChangeSomeTrack EventChangeSomeTrack;
+
     public GameObject GetObject()
     {
         return gameObject;
     }
+
+    #region Server 
+    [Server]
+    private void SetChangeTrack(int changeTrack)
+    {
+        EventChangeSomeTrack?.Invoke(changeTrack, true); 
+    }
+
+    [Command]
+    private void CmdSetChangeTrack(int val) => SetChangeTrack(val);
+    
+
+    #endregion
 
     public void ExplodeTrack()
     {
@@ -93,4 +113,16 @@ public class Track : MonoBehaviour
             }
         }
     }
+
+    #region Client 
+    
+    [ClientCallback]
+    private void Update()
+    {
+        if (!hasAuthority) { return;} 
+        if (isRepaired) CmdSetChangeTrack(identification);               
+    }
+
+    #endregion
+
 }

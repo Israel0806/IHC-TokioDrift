@@ -5,6 +5,8 @@ using Mirror;
 
 public class OrbController : MonoBehaviour
 {
+    [Header("Reference")]
+    [SerializeField] private Orb instanceOfCE= null;
     [Header("Initial position orbs")]
     public Transform orbSpawn1;
     public Transform orbSpawn2;
@@ -60,6 +62,7 @@ public class OrbController : MonoBehaviour
             if (randomNumber == 10) randomNumber = 0;
             GameObject orb = Instantiate(orbPrefab, orbSpawn.position, orbSpawn.rotation);
             orb.GetComponent<Orb>().trackAsignationForOrbe = randomNumber;
+            orb.GetComponent<Orb>().identification = randomNumber;
             //NetworkServer.Spawn(orb);
             orbes.Add(orb);
             randomNumber++;
@@ -106,6 +109,37 @@ public class OrbController : MonoBehaviour
 
         }
 
+        //revisar si un collected de otros clientes a sido recogido 
+
         if (auxAllOrbsCollected) allOrbsCollected = true;
     }
+
+    private void HandleChangeOfOrbe(int iden , bool state)
+    {
+        foreach (Orb orb in orbs)
+        {
+            if (orb != null && orb.identification == iden && state)
+            {
+                print("Other player change his orb");
+                ActivateTrack(orb.trackAsignationForOrbe);
+                //destroyOrd(orb);
+                orb.DestroyGameObject();
+                auxAllOrbsCollected = false;
+            }
+        }
+    }
+
+    private void onEnable()
+    {
+        instanceOfCE.EventChangeSomeOrbe += HandleChangeOfOrbe;
+    }
+
+    private void onDisable()
+    {
+        instanceOfCE.EventChangeSomeOrbe -= HandleChangeOfOrbe;       
+    }
+
+    
+
+
 }

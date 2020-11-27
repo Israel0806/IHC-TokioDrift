@@ -74,32 +74,6 @@ Transform:
   m_Father: {fileID: 8459990967410295283}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2415137157163725498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8459990967410662867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 450a15cd1b9d45f4baee4cc119c1141c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mMaterial: {fileID: 0}
-  fires: {fileID: 1293214839532523117}
-  beacon: {fileID: 4936705190102087469}
-  explosion: {fileID: 322747377449062059}
-  effects:
-  - {fileID: 888357304043338794}
-  - {fileID: 6889695658299155626}
-  - {fileID: 1685072966687896745}
-  - {fileID: 5696160706834726056}
-  - {fileID: 3561598033669967198}
-  - {fileID: 4385048592939690069}
-  TrackNumber: 0
-  CollectSound: {fileID: 8300000, guid: c1d1b8740810641508a7156b10ff59f2, type: 3}
-  isRepaired: 0
 --- !u!65 &3674130357235078933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -113,6 +87,51 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.208549, y: 1.664839, z: 8.521859}
   m_Center: {x: 0.00000047687894, y: 0.6539639, z: 5.0523853}
+--- !u!114 &2415137157163725498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459990967410662867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450a15cd1b9d45f4baee4cc119c1141c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  mMaterial: {fileID: 0}
+  fires: {fileID: 1293214839532523117}
+  beacon: {fileID: 4936705190102087469}
+  explosion: {fileID: 322747377449062059}
+  effects:
+  - {fileID: 888357304043338794}
+  - {fileID: 6889695658299155626}
+  - {fileID: 1685072966687896745}
+  - {fileID: 5696160706834726056}
+  - {fileID: 3561598033669967198}
+  - {fileID: 4385048592939690069}
+  identification: 0
+  TrackNumber: 0
+  CollectSound: {fileID: 8300000, guid: c1d1b8740810641508a7156b10ff59f2, type: 3}
+  isRepaired: 0
+--- !u!114 &-8055615794071931065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459990967410662867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1001 &24075421113142492
 PrefabInstance:
   m_ObjectHideFlags: 0

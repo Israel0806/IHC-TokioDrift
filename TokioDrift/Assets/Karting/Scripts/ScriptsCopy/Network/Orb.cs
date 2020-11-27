@@ -4,14 +4,20 @@ using UnityEngine;
 using Mirror;
 using KartGame.KartSystems;
 
-public class Orb : MonoBehaviour
+public class Orb : NetworkBehaviour
 {
     private KartController asd;
     public Rigidbody rigidBody;
+    public int identification;
 
     [Header("Orb stat")]
     public int  trackAsignationForOrbe = -1;
     public bool isCollected = false;
+
+    public delegate void ChangeSomeOrbe(int changeOrb, bool state);
+
+    [SyncEvent]
+    public event ChangeSomeOrbe EventChangeSomeOrbe;
 
     public void DestroyGameObject()
     {
@@ -22,6 +28,20 @@ public class Orb : MonoBehaviour
     {
         return gameObject;
     }
+
+
+    #region Server 
+    
+    [Server]
+    private void SetChangeOrbe(int changeOrb)
+    {
+        EventChangeSomeOrbe?.Invoke(changeOrb, true); 
+    }
+
+    [Command]
+    private void CmdSetChangeOrbe(int val) => SetChangeOrbe(val);
+
+    #endregion
 
     //void OnCollisionEnter(Collision target)
     //{
@@ -41,7 +61,19 @@ public class Orb : MonoBehaviour
             //set the tracker corresponce  
             isCollected = true;
             co.GetComponent<KartController>().TrackAssign = trackAsignationForOrbe;
+
         }
     }
+
+    #region Client 
+    
+    [ClientCallback]
+    private void Update()
+    {
+        if (!hasAuthority) { return;} 
+        if (isCollected) CmdSetChangeOrbe(identification);               
+    }
+
+    #endregion
 
 }

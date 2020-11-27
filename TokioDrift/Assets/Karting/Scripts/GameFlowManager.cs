@@ -12,6 +12,8 @@ public enum GameState { Play, Won, Lost }
 
 public class GameFlowManager : MonoBehaviour
 {
+    
+    [Header("Show score text ")]
     public TextMeshProUGUI textScore1;
     public TextMeshProUGUI textScore2;
     [Header("Parameters")]
@@ -69,7 +71,7 @@ public class GameFlowManager : MonoBehaviour
     bool isGameReady;
     public TrackController TC;
     public OrbController OC;
-    //public KartController[] kartsControllers;
+    public KartController[] kartsControllers;
     
    
     void Start()
@@ -115,21 +117,26 @@ public class GameFlowManager : MonoBehaviour
         StartCoroutine(CountdownThenStartRaceRoutine());
 
         // build tracks and orbs
-        //kartsControllers = FindObjectsOfType<KartController>();
-
-        foreach (ArcadeKart kart in karts)
+        kartsControllers = FindObjectsOfType<KartController>();
+        
+        foreach (KartController kart in kartsControllers)
         {
 
-            if (kart.isHost)
+            TC.SelectTracks(kart.randOrbNumber);
+            OC.CreateOrbs(kart.randTrackNumber);   
+
+            break;
+            
+            /*if (kart.isHost)
             {
                 TC.SelectTracks(kart.randOrbNumber);
-                OC.CreateOrbs(kart.randTrackNumber);
+                OC.CreateOrbs(kart.randTrackNumber);        
                 //Score1 =  kart.score;
                 break;
             }else{
                 //Score2 =  kart.score;
                 break;
-            }
+            }*/
         }
     }
 
@@ -192,7 +199,7 @@ public class GameFlowManager : MonoBehaviour
         else
         {
             karts = FindObjectsOfType<ArcadeKart>();
-            if (karts.Length == 2 && !isGameReady)
+            if (karts.Length == 1 && !isGameReady)
             {
                 isGameReady = true;
                 gameState = GameState.Play;
