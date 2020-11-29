@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class Track : NetworkBehaviour
+public class Track : MonoBehaviour
 {
     public Material mMaterial;
     public GameObject fires;
@@ -17,7 +17,7 @@ public class Track : NetworkBehaviour
     public AudioClip CollectSound;
     public bool isRepaired;
 
-
+/*
     public delegate void ChangeSomeTrack(int changeTrack, bool state);
 
     [SyncEvent]
@@ -32,6 +32,7 @@ public class Track : NetworkBehaviour
     [Server]
     private void SetChangeTrack(int changeTrack)
     {
+        print("SetChangeTrack");
         EventChangeSomeTrack?.Invoke(changeTrack, true); 
     }
 
@@ -40,7 +41,7 @@ public class Track : NetworkBehaviour
     
 
     #endregion
-
+*/
     public void ExplodeTrack()
     {
         if(mMaterial)
@@ -85,7 +86,7 @@ public class Track : NetworkBehaviour
         effects[index].SetActive(true);
 
     }
-
+    //
     public void OnTriggerEnter(Collider co)
     {
         //Hit another player
@@ -114,6 +115,7 @@ public class Track : NetworkBehaviour
         }
     }
 
+/*
     #region Client 
     
     [ClientCallback]
@@ -124,5 +126,5 @@ public class Track : NetworkBehaviour
     }
 
     #endregion
-
+    */
 }

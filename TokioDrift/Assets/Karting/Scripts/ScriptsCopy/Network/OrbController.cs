@@ -5,8 +5,8 @@ using Mirror;
 
 public class OrbController : MonoBehaviour
 {
-    [Header("Reference")]
-    [SerializeField] private Orb instanceOfCE= null;
+    // [Header("Reference")]
+    // [SerializeField] private Orb instanceOfCE= null;
     [Header("Initial position orbs")]
     public Transform orbSpawn1;
     public Transform orbSpawn2;
@@ -83,7 +83,7 @@ public class OrbController : MonoBehaviour
         //NetworkServer.Destroy(orb);
     }
 
-    void ActivateTrack(int trackAsignationForOrbe)
+    public void ActivateTrack(int trackAsignationForOrbe)
     {
         if (tracks.Length == 0)
             tracks = FindObjectsOfType<Track>();
@@ -113,7 +113,7 @@ public class OrbController : MonoBehaviour
 
         if (auxAllOrbsCollected) allOrbsCollected = true;
     }
-
+/*
     private void HandleChangeOfOrbe(int iden , bool state)
     {
         foreach (Orb orb in orbs)
@@ -123,23 +123,28 @@ public class OrbController : MonoBehaviour
                 print("Other player change his orb");
                 ActivateTrack(orb.trackAsignationForOrbe);
                 //destroyOrd(orb);
+                print("Number of Orb");
+                print(iden);
                 orb.DestroyGameObject();
                 auxAllOrbsCollected = false;
             }
         }
     }
+*/
 
+/*
     private void onEnable()
     {
+        print("onEnableTrack");
         instanceOfCE.EventChangeSomeOrbe += HandleChangeOfOrbe;
     }
 
     private void onDisable()
     {
+        print("onDisableTrack");    
         instanceOfCE.EventChangeSomeOrbe -= HandleChangeOfOrbe;       
     }
-
-    
+*/  
 
 
 }

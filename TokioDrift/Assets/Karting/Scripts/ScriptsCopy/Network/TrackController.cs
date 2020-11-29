@@ -7,8 +7,8 @@ using System;
 public class TrackController : MonoBehaviour
 {
     //Some references
-    [Header("Reference of comuncication")]
-    [SerializeField] private Track instanceOfCE= null;
+    // [Header("Reference of comuncication")]
+    // [SerializeField] private Track instanceOfCE= null;
     
     
     [Header("OrbController")]
@@ -102,20 +102,27 @@ public class TrackController : MonoBehaviour
 
     }
 
-    private void onEnable()
-    {
-        instanceOfCE.EventChangeSomeTrack += HandleChangeOfTrack;
-    }
+    // private void onEnable()
+    // {
+    //      print("onEnableTrack");
+    //     instanceOfCE.EventChangeSomeTrack += HandleChangeOfTrack;
+    // }
 
-    private void onDisable()
-    { 
-        instanceOfCE.EventChangeSomeTrack -= HandleChangeOfTrack;
-    }
+    // private void onDisable()
+    // { 
+    //      print("onDesableTrack");
+    //     instanceOfCE.EventChangeSomeTrack -= HandleChangeOfTrack;
+    // }
 
-    private void HandleChangeOfTrack(int iden, bool state)
-    {
-         foreach (Track track in tracks)
-            if (track != null && track.identification == iden  && state)
-                track.TrackRepaired();
-    }    
+    // private void HandleChangeOfTrack(int iden, bool state)
+    // {
+    //      foreach (Track track in tracks)
+    //         if (track != null && track.identification == iden  && state)
+    //         {
+    //             print("Number of Orb");
+    //             print(iden);
+    //             track.TrackRepaired();
+    //         }
+                
+    // }    
 }

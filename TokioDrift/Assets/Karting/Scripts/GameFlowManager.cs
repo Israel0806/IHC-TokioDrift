@@ -199,7 +199,7 @@ public class GameFlowManager : MonoBehaviour
         else
         {
             karts = FindObjectsOfType<ArcadeKart>();
-            if (karts.Length == 1 && !isGameReady)
+            if (karts.Length == 2 && !isGameReady)
             {
                 isGameReady = true;
                 gameState = GameState.Play;

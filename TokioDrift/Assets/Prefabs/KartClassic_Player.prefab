@@ -4579,6 +4579,11 @@ MonoBehaviour:
   TextTopSpeed: {fileID: 0}
   ComandoVoz: {fileID: 0}
   isLocalPlayer: 0
+  isHost: 0
+  randOrbNumber: 0
+  randTrackNumber: 0
+  score: 0
+  scoreOtherPlayer: 0
 --- !u!114 &2756207468455407314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4741,6 +4746,7 @@ MonoBehaviour:
   randTrackNumber: 0
   orb: {fileID: 7532149498304594756}
   score: 0
+  scoreOtherPlayer: 0
   TrackAssign: -1
 --- !u!135 &5021435037513267439
 SphereCollider:
@@ -4753,8 +4759,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.5149673
+  m_Center: {x: 0, y: 0, z: 0.014967322}
 --- !u!1001 &4528634422009241221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4781,6 +4787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6412761444007368938, guid: 09333ef4f7ef2a7d98647861a087b351,
+        type: 3}
+      propertyPath: m_AssetId
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6802744982761181819, guid: 09333ef4f7ef2a7d98647861a087b351,
         type: 3}

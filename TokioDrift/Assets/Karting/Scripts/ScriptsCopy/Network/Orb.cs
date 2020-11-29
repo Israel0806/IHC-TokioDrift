@@ -4,7 +4,7 @@ using UnityEngine;
 using Mirror;
 using KartGame.KartSystems;
 
-public class Orb : NetworkBehaviour
+public class Orb : MonoBehaviour
 {
     private KartController asd;
     public Rigidbody rigidBody;
@@ -14,10 +14,10 @@ public class Orb : NetworkBehaviour
     public int  trackAsignationForOrbe = -1;
     public bool isCollected = false;
 
-    public delegate void ChangeSomeOrbe(int changeOrb, bool state);
+    // public delegate void ChangeSomeOrbe(int changeOrb, bool state);
 
-    [SyncEvent]
-    public event ChangeSomeOrbe EventChangeSomeOrbe;
+    // [SyncEvent]
+    // public event ChangeSomeOrbe EventChangeSomeOrbe;
 
     public void DestroyGameObject()
     {
@@ -29,12 +29,13 @@ public class Orb : NetworkBehaviour
         return gameObject;
     }
 
-
+    /*
     #region Server 
     
     [Server]
     private void SetChangeOrbe(int changeOrb)
     {
+        print("SetChangeOrbe");
         EventChangeSomeOrbe?.Invoke(changeOrb, true); 
     }
 
@@ -42,6 +43,7 @@ public class Orb : NetworkBehaviour
     private void CmdSetChangeOrbe(int val) => SetChangeOrbe(val);
 
     #endregion
+    */
 
     //void OnCollisionEnter(Collision target)
     //{
@@ -64,7 +66,7 @@ public class Orb : NetworkBehaviour
 
         }
     }
-
+/*
     #region Client 
     
     [ClientCallback]
@@ -75,5 +77,5 @@ public class Orb : NetworkBehaviour
     }
 
     #endregion
-
+*/
 }

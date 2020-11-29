@@ -5,11 +5,12 @@ using Mirror;
 public class ComunicationStates : NetworkBehaviour
 {
 
-    //private int sendOrbToEliminate;
-    //private int sendTrackToQuitFire;
-    //[SyncVar]
-    //private int orbe
     
+    [Header("Reference")]
+    // [SerializeField] private Orb CS = null;
+    [SerializeField] private TrackController TC;
+    [SerializeField] private OrbController OC;
+
     //state 1 = delete it
     //state 2 = activate for all(only in case of tracks )
 
@@ -46,13 +47,23 @@ public class ComunicationStates : NetworkBehaviour
 
 
     #region Client 
-    
-
     [ClientCallback]
     private void Update()
     {
-        if (!hasAuthority) { return;}  
-               
+        if (!hasAuthority) { return;} 
+        
+        // Verify tracks 
+        foreach (Track track in TC.tracks)
+        {
+            if (track != null && track.isRepaired) CmdSetChangeTrack(track.identification);           
+        }
+            
+         // Verify orbs 
+        foreach (Orb orb in OC.orbs)
+        {
+            if (orb != null && orb.isCollected) CmdSetChangeOrbe(orb.identification);   
+        }               
     }
+
     #endregion
 }

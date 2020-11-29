@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KartGame.KartSystems;
 
 public class ControlWheel : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class ControlWheel : MonoBehaviour
             ImageWrong.SetActive(true);
             ImageRight.SetActive(false);
 
-            if (Car.GetComponent<KartGame.KartSystems.KeyboardInput>().StateDetect) stateChange = true; // if cnot detecting change
+            if (Car.GetComponent<KeyboardInput>().StateDetect) stateChange = true; // if cnot detecting change
         }
         else
         {

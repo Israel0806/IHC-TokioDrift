@@ -1881,7 +1881,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2081171786}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ControllerTutorial2, Assembly-CSharp
         m_MethodName: toggleStart
         m_Mode: 1
@@ -2080,11 +2080,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1291593345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bafba43282d9857479b03cbd656923df, type: 3}
+  m_Script: {fileID: 11500000, guid: dcb7d58361c3c2f45a6a7ba9cc11a541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 0
-  NetworkManager: {fileID: 1345824429}
+  rotationSpeed: {x: 0, y: 0, z: 0.2}
+  rotate: 0
 --- !u!1 &1333909511
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,10 +2247,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1345824429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97891bf917e694049a3062d6ec94bf29, type: 3}
+  m_Script: {fileID: 11500000, guid: 13fb4356753340106a1e8881c0327004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 0
+  dontDestroyOnLoad: 1
   runInBackground: 1
   autoStartServerBuild: 1
   showDebugMessages: 0
@@ -2259,14 +2259,14 @@ MonoBehaviour:
   onlineScene: 
   transport: {fileID: 1345824431}
   networkAddress: localhost
-  maxConnections: 1
+  maxConnections: 4
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 6160822886590949382, guid: 431181b0cbf9630479ed0bb9ce5bc2e0,
     type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 1
+  playerSpawnMethod: 0
   spawnPrefabs: []
   playerSpawn: {fileID: 1738948715}
 --- !u!114 &1345824431
@@ -2624,7 +2624,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1345824430}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Mirror.NetworkManager, Mirror
         m_MethodName: StopServer
         m_Mode: 1
@@ -3195,7 +3195,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2046433673}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff92c3af4eeb6d4ba650917bf58e5aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 40979251e0dc28900b960d9d39e9e7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   NetworkManager: {fileID: 1345824429}
@@ -3244,20 +3244,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2081171784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae568042a315d24a8adc8a8df45fdfd, type: 3}
+  m_Script: {fileID: 11500000, guid: c45ef0f70acfa7073a021a9dab02643e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: {x: 0, y: 0, z: 0, w: 0}
-  started: 0
-  phoneConnected: 0
-  angle: {fileID: 966074706}
-  maxAngle: {fileID: 2026244960}
-  minAngle: {fileID: 1273828255}
-  textTimer: {fileID: 377195960}
-  Title: {fileID: 1204623}
-  TextMobileConn: {fileID: 673817964}
-  StartButton: {fileID: 1094242225}
-  NextTutorial: {fileID: 1738349727}
+  state: 0
+  NetworkManager: {fileID: 1345824429}
 --- !u!1 &2109088659
 GameObject:
   m_ObjectHideFlags: 0
