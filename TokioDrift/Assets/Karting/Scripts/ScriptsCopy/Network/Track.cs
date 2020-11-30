@@ -16,7 +16,7 @@ public class Track : MonoBehaviour
 
     public AudioClip CollectSound;
     public bool isRepaired;
-
+    private GameFlowManager GameFlow ;
 /*
     public delegate void ChangeSomeTrack(int changeTrack, bool state);
 
@@ -77,6 +77,7 @@ public class Track : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameFlow = GameFlow = GameObject.Find("GameManager").GetComponent<GameFlowManager>();    
         isRepaired = false;
     }
 
@@ -92,12 +93,16 @@ public class Track : MonoBehaviour
         //Hit another player
         if (co.tag.Equals("Player"))
         {
+            print("UNO-1T");
             if (co.GetComponent<KartController>().TrackAssign == TrackNumber)
             {
-
+                print("UNO-2T");    
                 isRepaired = true;
                 co.GetComponent<KartController>().TrackAssign = -1;
-                co.GetComponent<KartController>().score += 40; // if it is repair, plus
+                print("UNO-3T");
+                GameFlow.myScore += 100;
+                //co.GetComponent<KartController>().score += 40; // if it is repair, plus
+                print("UNO-4T");
                 if (CollectSound)
                     AudioUtility.CreateSFX(CollectSound, transform.position, AudioUtility.AudioGroups.Pickup, 0f);
 
@@ -107,10 +112,12 @@ public class Track : MonoBehaviour
                 StartCoroutine(StartEffect(3, 0.3f));
                 StartCoroutine(StartEffect(4, 0.4f));
                 StartCoroutine(StartEffect(5, 0.5f));
+                print("UNO-5T");
             }
             else
             {
-                co.GetComponent<KartController>().score -= 15;// if not correspond to pass there
+                GameFlow.myScore -= 15;
+                //co.GetComponent<KartController>().score -= 15;// if not correspond to pass there
             }
         }
     }

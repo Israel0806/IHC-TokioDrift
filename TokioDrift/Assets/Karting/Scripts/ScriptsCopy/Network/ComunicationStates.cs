@@ -8,8 +8,8 @@ public class ComunicationStates : NetworkBehaviour
     
     [Header("Reference")]
     // [SerializeField] private Orb CS = null;
-    [SerializeField] private TrackController TC;
-    [SerializeField] private OrbController OC;
+    private TrackController TC;
+    private OrbController OC;
 
     //state 1 = delete it
     //state 2 = activate for all(only in case of tracks )
@@ -22,7 +22,13 @@ public class ComunicationStates : NetworkBehaviour
     [SyncEvent]
     public event ChangeSomeTrack EventChangeSomeTrack;
 
-    #region Server 
+    #region Server
+    
+    public override void OnStartServer()
+    {
+        TC = GameObject.Find("===TRACK====").GetComponent<TrackController>();
+        OC = GameObject.Find("====ORB=====").GetComponent<OrbController>();
+    } 
     
     [Server]
     private void SetChangeOrbe(int changeOrb)
@@ -55,12 +61,14 @@ public class ComunicationStates : NetworkBehaviour
         // Verify tracks 
         foreach (Track track in TC.tracks)
         {
+            print("Verify tracks_ CS");
             if (track != null && track.isRepaired) CmdSetChangeTrack(track.identification);           
         }
             
          // Verify orbs 
         foreach (Orb orb in OC.orbs)
         {
+            print("Verify Orb_CS");
             if (orb != null && orb.isCollected) CmdSetChangeOrbe(orb.identification);   
         }               
     }

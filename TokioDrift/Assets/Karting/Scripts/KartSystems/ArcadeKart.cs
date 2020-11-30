@@ -12,6 +12,8 @@ namespace KartGame.KartSystems
         /// <summary>
         /// Contains parameters that can adjust the kart's behaviors temporarily.
         /// </summary>
+        public int myScore = 0;
+
         [System.Serializable]
         public class StatPowerup
         {
@@ -90,6 +92,10 @@ namespace KartGame.KartSystems
         public float GroundPercent { get; private set; }
 
 
+        public GameObject GetGameObject()
+        {
+            return gameObject;
+        }
 
         public ArcadeKart.Stats baseStats = new ArcadeKart.Stats
         {

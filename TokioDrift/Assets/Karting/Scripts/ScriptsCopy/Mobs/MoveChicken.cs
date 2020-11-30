@@ -19,6 +19,7 @@ public class MoveChicken : MonoBehaviour
     private bool Hitted = false;
     TextMeshProUGUI score;
     public AudioClip DeathSound;
+    private GameFlowManager GameFlow ;
 
 
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class MoveChicken : MonoBehaviour
         TrackLayer = LayerMask.GetMask("Track");
         PlayerLayer = LayerMask.GetMask("Kart");
         ChickenAnimator = this.GetComponent<Animator>();
+        GameFlow = GameObject.Find("GameManager").GetComponent<GameFlowManager>();
     }
 
     // Update is called once per frame
@@ -78,7 +80,8 @@ public class MoveChicken : MonoBehaviour
             {
                 //float _score = int.Parse(score.text);
                 //score.text = (_score + 100).ToString();
-                co.GetComponent<KartController>().score += 100;
+                GameFlow.myScore += 40;
+                //co.GetComponent<KartController>().score += 100;
             }
 
             Hitted = true;

@@ -13,9 +13,13 @@ public enum GameState { Play, Won, Lost }
 public class GameFlowManager : MonoBehaviour
 {
     
-    [Header("Show score text ")]
-    public TextMeshProUGUI textScore1;
-    public TextMeshProUGUI textScore2;
+    // [Header("Show score text ")]
+    // public TextMeshProUGUI textScore1;
+    // public TextMeshProUGUI textScore2;
+    public ControlComunication CCS;
+    public DisplayScore DS;
+    public GameObject GOCCS;
+    public GameObject GODS;
     [Header("Parameters")]
     [Tooltip("Duration of the fade-to-black at the end of the game")]
     public float endSceneLoadDelay = 3f;
@@ -52,8 +56,7 @@ public class GameFlowManager : MonoBehaviour
 
     public ArcadeKart[] karts;
     
-    public int Score1;
-    public int Score2;
+    public int myScore = 0;
 
     ObjectiveManager m_ObjectiveManager;
     TimeManager m_TimeManager;
@@ -118,12 +121,17 @@ public class GameFlowManager : MonoBehaviour
 
         // build tracks and orbs
         kartsControllers = FindObjectsOfType<KartController>();
-        
+        //***************************************************************
+        GOCCS.SetActive(true);
+        GODS.SetActive(true);
+        // CCS.enabled = true;
+        // DS.enabled = true;
+        //***************************************************************
         foreach (KartController kart in kartsControllers)
         {
 
-            TC.SelectTracks(kart.randOrbNumber);
-            OC.CreateOrbs(kart.randTrackNumber);   
+            TC.SelectTracks(kart.randTrackNumber);
+            OC.CreateOrbs(kart.randOrbNumber);   
 
             break;
             
@@ -199,7 +207,7 @@ public class GameFlowManager : MonoBehaviour
         else
         {
             karts = FindObjectsOfType<ArcadeKart>();
-            if (karts.Length == 2 && !isGameReady)
+            if (karts.Length == 1 && !isGameReady)
             {
                 isGameReady = true;
                 gameState = GameState.Play;
@@ -207,19 +215,16 @@ public class GameFlowManager : MonoBehaviour
             }
 
             //update the score of both players and send this data 
-            //kartsControllers = FindObjectsOfType<KartController>();
+            kartsControllers = FindObjectsOfType<KartController>();
             foreach (ArcadeKart kart in karts)
             {
-                if (kart.isHost)
+                if (kart.isLocalPlayer)
                 {
-                    Score1 = kart.score;
-                }
-                else
-                {
-                    Score2 = kart.score;
+                     kart.myScore = myScore;
                 }
             }
-
+            
+            /*
             foreach (ArcadeKart kart in karts)
             {
                 if (kart.isHost)
@@ -248,7 +253,7 @@ public class GameFlowManager : MonoBehaviour
                 }
             }
 
-
+            */
             if (m_ObjectiveManager.AreAllObjectivesCompleted())
                 EndGame(true);
 

@@ -32,11 +32,12 @@ public class KartController : NetworkBehaviour
     private Orb[] orbs;
 
     [Header("Game Stats")]
+    
     [SyncVar]
     public int score = 0;
     [SyncVar]
     public int scoreOtherPlayer = 0; 
-    //scroes with the video
+    
 
     //El objeto orbe le asigana al juegador el track que debe ir  a conseguir
     public int TrackAssign = -1;

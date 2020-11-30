@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KartGame.KartSystems;
 
 public class ControlComunication : MonoBehaviour
 {
     //Some references
     
     [Header("Reference")]
-    [SerializeField] private ComunicationStates CS = null;
+    private ComunicationStates CS = null;
     [SerializeField] private TrackController TC = null;
     [SerializeField] private OrbController OC = null;
 
+    
     private void onEnable()
     {
+        ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
+        foreach (ArcadeKart kart in karts)
+            if(kart.isLocalPlayer)
+                CS = kart.GetGameObject().GetComponent<ComunicationStates>();    
         CS.EventChangeSomeOrbe += HandleChangeOfOrbe;
         CS.EventChangeSomeTrack += HandleChangeOfOrbe;
     }
@@ -38,6 +44,7 @@ public class ControlComunication : MonoBehaviour
                 OC.auxAllOrbsCollected = false;
             }
         }
+         if (OC.auxAllOrbsCollected) OC.allOrbsCollected = true;
     }
 
     private void HandleChangeOfTrack(int iden, bool state)
@@ -53,9 +60,9 @@ public class ControlComunication : MonoBehaviour
     }    
 
 
-    // Update is called once per frame
-    void Update()
-    {
+    // // Update is called once per frame
+    // void Update()
+    // {
         
-    }
+    // }
 }

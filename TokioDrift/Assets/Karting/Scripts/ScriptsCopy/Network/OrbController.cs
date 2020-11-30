@@ -108,7 +108,7 @@ public class OrbController : MonoBehaviour
             }
 
         }
-
+            
         //revisar si un collected de otros clientes a sido recogido 
 
         if (auxAllOrbsCollected) allOrbsCollected = true;
