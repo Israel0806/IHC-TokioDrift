@@ -16,8 +16,8 @@ public class GameFlowManager : MonoBehaviour
     // [Header("Show score text ")]
     // public TextMeshProUGUI textScore1;
     // public TextMeshProUGUI textScore2;
-    public ControlComunication CCS;
-    public DisplayScore DS;
+    //public ControlComunication CCS;
+    //public DisplayScore DS;
     public GameObject GOCCS;
     public GameObject GODS;
     [Header("Parameters")]
@@ -124,8 +124,8 @@ public class GameFlowManager : MonoBehaviour
         //***************************************************************
         GOCCS.SetActive(true);
         GODS.SetActive(true);
-        // CCS.enabled = true;
-        // DS.enabled = true;
+        GOCCS.GetComponent<ControlComunication>().enabled = true;
+        GODS.GetComponent<DisplayScore>().enabled = true;
         //***************************************************************
         foreach (KartController kart in kartsControllers)
         {

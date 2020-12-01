@@ -73,7 +73,7 @@ public class MoveChicken : MonoBehaviour
     {
         if (co.tag.Equals("Player"))
         {
-            print("Player has touched");
+            //print("Player has touched");
             if (DeathSound)
                 AudioUtility.CreateSFX(DeathSound, transform.position, AudioUtility.AudioGroups.Collision, 0f);
             if (co.GetComponent<ArcadeKart>().isLocalPlayer)

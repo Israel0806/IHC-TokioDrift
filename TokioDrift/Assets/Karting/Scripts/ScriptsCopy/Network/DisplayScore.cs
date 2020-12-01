@@ -18,19 +18,25 @@ public class DisplayScore : MonoBehaviour
     private int score2;
 
     
-    private void onEnable()
+    void OnEnable()
     {
         ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
-        foreach (ArcadeKart kart in karts)
-            if(kart.isLocalPlayer)
-                _Score = kart.GetGameObject().GetComponent<Score>();
-
+        foreach (ArcadeKart kart in karts){
+            if(kart.isLocalPlayer) _Score = kart.GetGameObject().GetComponent<Score>();
+        }
+            
         _Score.EventChangeScore += HandleChangeScore;
+        print("onEnable DS");
+        print("si");
+        print("---------------");
     }
 
-    private void onDisable()
+    void onDisable()
     {
          _Score.EventChangeScore -= HandleChangeScore;
+        print("onDisable DS");
+        print("si");
+        print("---------------");
     }
 
     private void HandleChangeScore(int newValue)

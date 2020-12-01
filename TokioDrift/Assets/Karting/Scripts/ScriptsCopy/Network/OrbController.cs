@@ -93,26 +93,25 @@ public class OrbController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        auxAllOrbsCollected = true;
-        foreach (Orb orb in orbs)
-        {
-            if (orb != null && orb.isCollected)
-            {
-                print("An orb has been collected");
-                ActivateTrack(orb.trackAsignationForOrbe);
-                //destroyOrd(orb);
-                orb.DestroyGameObject();
-                auxAllOrbsCollected = false;
-            }
 
-        }
-            
-        //revisar si un collected de otros clientes a sido recogido 
+    // void Update()
+    // {
+    //     auxAllOrbsCollected = true;
+    //     foreach (Orb orb in orbs)
+    //     {
+    //         if (orb != null && orb.isCollected)
+    //         {
+    //             print("An orb has been collected");
+    //             ActivateTrack(orb.trackAsignationForOrbe);
+    //             //destroyOrd(orb);
+    //             orb.DestroyGameObject();
+    //             auxAllOrbsCollected = false;
+    //         }
+    //     }
+    //     if (auxAllOrbsCollected) allOrbsCollected = true;
+    // }
 
-        if (auxAllOrbsCollected) allOrbsCollected = true;
-    }
+    //revisar si un collected de otros clientes a sido recogido 
 /*
     private void HandleChangeOfOrbe(int iden , bool state)
     {

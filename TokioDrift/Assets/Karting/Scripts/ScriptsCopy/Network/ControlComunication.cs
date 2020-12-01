@@ -12,51 +12,70 @@ public class ControlComunication : MonoBehaviour
     [SerializeField] private TrackController TC = null;
     [SerializeField] private OrbController OC = null;
 
-    
-    private void onEnable()
+    void Awake()
     {
-        ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
-        foreach (ArcadeKart kart in karts)
-            if(kart.isLocalPlayer)
-                CS = kart.GetGameObject().GetComponent<ComunicationStates>();    
-        CS.EventChangeSomeOrbe += HandleChangeOfOrbe;
-        CS.EventChangeSomeTrack += HandleChangeOfOrbe;
+        print("ControlComunication ready !");
     }
 
-    private void onDisable()
+    void OnEnable()
+    {
+        ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
+        foreach (ArcadeKart kart in karts){
+            if(kart.isLocalPlayer) CS = kart.GetGameObject().GetComponent<ComunicationStates>();
+        }
+                
+        CS.EventChangeSomeOrbe += HandleChangeOfOrbe;
+        CS.EventChangeSomeTrack += HandleChangeOfTrack;
+        print("onEnable CCS");
+        print("si");
+        print("---------------"); 
+    }
+
+    void  onDisable()
     {
         CS.EventChangeSomeOrbe -= HandleChangeOfOrbe;       
-        CS.EventChangeSomeTrack -= HandleChangeOfOrbe;
+        CS.EventChangeSomeTrack -= HandleChangeOfTrack;
+        print("onDisable CCS");
+        print("si");
+        print("---------------");
     }
 
     private void HandleChangeOfOrbe(int iden, bool state)
     {
+        OC.auxAllOrbsCollected = true;
         foreach (Orb orb in OC.orbs)
         {
             if (orb != null && orb.identification == iden && state)
             {
-                print("Other player change his orb");
+                //print("Other player change his orb");
                 OC.ActivateTrack(orb.trackAsignationForOrbe);
                 //destroyOrd(orb);
-                //print("Number of Orb");
-                //print(iden);
+                print("Number of Orb");
+                print(iden);
+                print("******************");
                 orb.DestroyGameObject();
                 OC.auxAllOrbsCollected = false;
             }
         }
-         if (OC.auxAllOrbsCollected) OC.allOrbsCollected = true;
+        if (OC.auxAllOrbsCollected) OC.allOrbsCollected = true;
     }
 
     private void HandleChangeOfTrack(int iden, bool state)
     {
         //change my orbs and track with this new information 
-        foreach (Track track in TC.tracks)
+        foreach (Track track in TC.tracks){
+            // print("xxxxxxxxxxxxxxxxxxxxxxx");
+            // print(track.identification);
+            // print("xxxxxxxxxxxxxxxxxxxxxxx");
             if (track != null && track.identification == iden  && state)
             {
-                //print("Number of Orb");
-                //print(iden);
+                print("Number of Track");
+                print(iden);
+                print("******************");
                 track.TrackRepaired();
+                track.isReady = true;
             }
+        }   
     }    
 
 

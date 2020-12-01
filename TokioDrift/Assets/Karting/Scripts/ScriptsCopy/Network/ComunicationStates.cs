@@ -23,22 +23,29 @@ public class ComunicationStates : NetworkBehaviour
     public event ChangeSomeTrack EventChangeSomeTrack;
 
     #region Server
-    
+
     public override void OnStartServer()
     {
         TC = GameObject.Find("===TRACK====").GetComponent<TrackController>();
         OC = GameObject.Find("====ORB=====").GetComponent<OrbController>();
+        print("ComunicationStates ready !");
     } 
     
     [Server]
     private void SetChangeOrbe(int changeOrb)
     {
+        print("SetChangeOrbe");
+        print(changeOrb);
+        print("---------------"); 
         EventChangeSomeOrbe?.Invoke(changeOrb, true); 
     }
 
     [Server]
     private void SetChangeTrack(int changeTrack)
     {
+        print("SetChangeTrack");
+        print(changeTrack);
+        print("---------------"); 
         EventChangeSomeTrack?.Invoke(changeTrack, true); 
     }
 
@@ -56,19 +63,24 @@ public class ComunicationStates : NetworkBehaviour
     [ClientCallback]
     private void Update()
     {
-        if (!hasAuthority) { return;} 
         
+        if (!hasAuthority) { return;} 
         // Verify tracks 
         foreach (Track track in TC.tracks)
         {
-            print("Verify tracks_ CS");
-            if (track != null && track.isRepaired) CmdSetChangeTrack(track.identification);           
+            //print("Verify tracks_ CS");
+            
+            if (track != null && track.isRepaired && !track.isReady ) 
+            {
+                track.isReady = true;
+                CmdSetChangeTrack(track.identification);
+            }           
         }
             
          // Verify orbs 
         foreach (Orb orb in OC.orbs)
         {
-            print("Verify Orb_CS");
+            //print("Verify Orb_CS");
             if (orb != null && orb.isCollected) CmdSetChangeOrbe(orb.identification);   
         }               
     }

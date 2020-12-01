@@ -58,6 +58,10 @@ public class KartController : NetworkBehaviour
     }
     */
 
+    public override void OnStartServer(){
+        print("KartController ready!");
+    }
+    
     #region Start & Stop Callbacks
 
     void Awake()

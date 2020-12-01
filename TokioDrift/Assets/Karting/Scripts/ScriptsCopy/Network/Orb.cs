@@ -57,16 +57,16 @@ public class Orb : MonoBehaviour
 
     void OnTriggerEnter(Collider co)
     {
-         print("UNO-1O");
+        //print("UNO-1O");
         //Hit another player
         if (co.tag.Equals("Player") && co.GetComponent<KartController>().TrackAssign == -1)
         {
-            print("UNO-20");   
+            //print("UNO-20");   
             //set the tracker corresponce  
             isCollected = true;
-            print("UNO-30");
+            //print("UNO-30");
             co.GetComponent<KartController>().TrackAssign = trackAsignationForOrbe;
-            print("UNO-40");
+            //print("UNO-40");
         }
     }
 /*

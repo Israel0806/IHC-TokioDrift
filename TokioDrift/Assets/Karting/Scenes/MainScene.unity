@@ -8399,6 +8399,16 @@ PrefabInstance:
       propertyPath: CCS
       value: 
       objectReference: {fileID: 1105958912}
+    - target: {fileID: 1315839542190839936, guid: b26c4a65cf4c6475a92bfd03c2c3282b,
+        type: 3}
+      propertyPath: GODS
+      value: 
+      objectReference: {fileID: 663365602}
+    - target: {fileID: 1315839542190839936, guid: b26c4a65cf4c6475a92bfd03c2c3282b,
+        type: 3}
+      propertyPath: GOCCS
+      value: 
+      objectReference: {fileID: 1105958910}
     - target: {fileID: 1315839542190839937, guid: b26c4a65cf4c6475a92bfd03c2c3282b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18501,11 +18511,9 @@ MonoBehaviour:
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
-  spawnPrefabs:
-  - {fileID: 763465014111656579, guid: 887f207075c431f4ab322d7cf453dfea, type: 3}
+  spawnPrefabs: []
   playerSpawn1: {fileID: 659552159}
   playerSpawn2: {fileID: 1903117445}
-  CS: {fileID: 0}
   TC: {fileID: 960220165}
   OC: {fileID: 2141022879}
   Score1: 0

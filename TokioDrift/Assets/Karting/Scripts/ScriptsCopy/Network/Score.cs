@@ -26,6 +26,7 @@ public class Score : NetworkBehaviour
 
     public override void OnStartServer()
     {
+        print("score ready!");
         SetChangeNewScore(0); 
         GameFlow = GameObject.Find("GameManager").GetComponent<GameFlowManager>(); 
     } 
@@ -44,6 +45,7 @@ public class Score : NetworkBehaviour
         
         if(currentScore != GameFlow.myScore )// my score is change 
         {
+            print("CmdSetNewScore **");
             CmdSetNewScore(GameFlow.myScore);
         }
 

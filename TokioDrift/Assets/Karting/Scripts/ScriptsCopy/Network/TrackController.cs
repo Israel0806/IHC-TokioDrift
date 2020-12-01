@@ -29,6 +29,7 @@ public class TrackController : MonoBehaviour
 
     public void SelectTracks(int randomNumber)
     {
+        
         int randomTrack/* = Random.Range(0, 10)*/;
         //tracks = new Track[10];
         Track[] AllTracks;
@@ -93,14 +94,17 @@ public class TrackController : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        foreach (Track track in tracks)
-            if (track != null && track.isRepaired)
-                track.TrackRepaired();
+    
+    
+    // void Update()
+    // {
+    //     foreach (Track track in tracks)
+    //         if (track != null && track.isRepaired){
+    //             print("Track has been repair");
+    //             track.TrackRepaired();        
+    //         }
                 
-
-    }
+    // }
 
     // private void onEnable()
     // {

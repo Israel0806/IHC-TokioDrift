@@ -23,7 +23,7 @@ public class NetworkManagerCar : NetworkManager
 
     [Header("Managers")]
     bool isGameReady;
-    public GameObject CS;
+    //public GameObject CS;
     public TrackController TC;
     public OrbController OC;
     public int Score1;
@@ -42,6 +42,7 @@ public class NetworkManagerCar : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
+        print("listoServer");
         calledConnected = true;
         calledNotConnected = false;
 
@@ -57,13 +58,13 @@ public class NetworkManagerCar : NetworkManager
         if (numPlayers == 1)
             player.GetComponent<KartController>().isHost = true;
 
-        if (numPlayers == 2)
-        {
-            print("to be CS spawned");
-            CS = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "ComunicationStates"));
-            NetworkServer.Spawn(CS);
-            print("CS spawned");
-        }
+        // if (numPlayers == 2)
+        // {
+        //     print("to be CS spawned");
+        //     CS = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "ComunicationStates"));
+        //     NetworkServer.Spawn(CS);
+        //     print("CS spawned");
+        // }
 
         //On start we equal scores
         /*if(player.GetComponent<KartController>().isHost){

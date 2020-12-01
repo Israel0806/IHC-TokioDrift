@@ -15,6 +15,11 @@ public class PlayerInfoDisplay : NetworkBehaviour
     protected Callback<AvatarImageLoaded_t> avatarImageLoaded;
 
     #region Server
+    public override void OnStartServer()
+    {
+        print("PlayerInfoDisplay ready!");
+    }
+
     public void SetSteamId(ulong steamId)
     {
         this.steamID = steamId;
