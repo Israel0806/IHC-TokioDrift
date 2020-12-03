@@ -7,23 +7,22 @@ using KartGame.KartSystems;
 public class DisplayScore : MonoBehaviour
 {
     //Some references
-    [Header("Show score text ")]
-    public TextMeshProUGUI textScore1;
-    public TextMeshProUGUI textScore2;
+    // [Header("Show score text ")]
+    // public TextMeshProUGUI textScore1;
+    // public TextMeshProUGUI textScore2;
 
     [Header("Reference")]
-    private Score _Score = null;
+    public Score _Score = null;
 
-    private int score1;
-    private int score2;
+    public int myScore = 0;
 
     
     void OnEnable()
     {
-        ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
-        foreach (ArcadeKart kart in karts){
-            if(kart.isLocalPlayer) _Score = kart.GetGameObject().GetComponent<Score>();
-        }
+        // ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
+        // foreach (ArcadeKart kart in karts){
+        //     if(kart.isLocalPlayer) _Score = kart.GetGameObject().GetComponent<Score>();
+        // }
             
         _Score.EventChangeScore += HandleChangeScore;
         print("onEnable DS");
@@ -44,19 +43,20 @@ public class DisplayScore : MonoBehaviour
         
         //Tengo el score local y lo pongo en mi score local de texto
         //Y busco al otro jugador su score y lo represento en la otra casilla
-        ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
-        foreach (ArcadeKart kart in karts)
-        {
-            if(kart.isLocalPlayer)
-            {
-                score1 = kart.GetGameObject().GetComponent<Score>().currentScore;
-            }else{
-                score2 = kart.GetGameObject().GetComponent<Score>().currentScore;
-            }
-
-        }
-        textScore1.text = (score1).ToString();
-        textScore2.text = (score2).ToString();
+        myScore = _Score.currentScore;
+        // ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
+        // foreach (ArcadeKart kart in karts)
+        // {
+        //     if(kart.isLocalPlayer)
+        //     {
+        //         score1 = kart.GetGameObject().GetComponent<Score>().currentScore;
+        //     }
+        //     // else{
+        //     //     score2 = kart.GetGameObject().GetComponent<Score>().currentScore;
+        //     // }
+        // }
+        // textScore1.text = (score1).ToString();
+        // textScore2.text = (score2).ToString();
     }    
 
     // Update is called once per frame

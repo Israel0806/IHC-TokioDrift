@@ -80,7 +80,8 @@ public class MoveChicken : MonoBehaviour
             {
                 //float _score = int.Parse(score.text);
                 //score.text = (_score + 100).ToString();
-                GameFlow.myScore += 40;
+                //GameFlow.myScore += 40;
+                co.GetComponent<ArcadeKart>().myScore += 40;
                 //co.GetComponent<KartController>().score += 100;
             }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using KartGame.KartSystems;
 
 public class Track : MonoBehaviour
 {
@@ -101,7 +102,8 @@ public class Track : MonoBehaviour
                 isRepaired = true;
                 co.GetComponent<KartController>().TrackAssign = -1;
                 //print("UNO-3T");
-                GameFlow.myScore += 100;
+                co.GetComponent<ArcadeKart>().myScore += 100;
+                // GameFlow.myScore += 100;
                 //co.GetComponent<KartController>().score += 40; // if it is repair, plus
                 //print("UNO-4T");
                 if (CollectSound)
@@ -117,7 +119,7 @@ public class Track : MonoBehaviour
             }
             else
             {
-                GameFlow.myScore -= 15;
+                co.GetComponent<ArcadeKart>().myScore -= 15;
                 //co.GetComponent<KartController>().score -= 15;// if not correspond to pass there
             }
         }

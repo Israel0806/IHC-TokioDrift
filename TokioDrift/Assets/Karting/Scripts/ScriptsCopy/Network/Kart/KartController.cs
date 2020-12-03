@@ -31,12 +31,12 @@ public class KartController : NetworkBehaviour
     private Track[] tracks;
     private Orb[] orbs;
 
-    [Header("Game Stats")]
+    //[Header("Game Stats")]
     
-    [SyncVar]
-    public int score = 0;
-    [SyncVar]
-    public int scoreOtherPlayer = 0; 
+    // [SyncVar]
+    // public int score = 0;
+    // [SyncVar]
+    // public int scoreOtherPlayer = 0; 
     
 
     //El objeto orbe le asigana al juegador el track que debe ir  a conseguir
@@ -101,9 +101,11 @@ public class KartController : NetworkBehaviour
 
         gameManager = GameObject.Find("GameManager");
 
-        randOrbNumber = Random.Range(0, 10);
-        randTrackNumber = Random.Range(0, 10);
+        // randOrbNumber = Random.Range(0, 10);
+        // randTrackNumber = Random.Range(0, 10);
         
+        randOrbNumber = 5;
+        randTrackNumber = 9;
         
         /// Kart
         arcadeKart = this.GetComponent<ArcadeKart>();
@@ -133,8 +135,8 @@ public class KartController : NetworkBehaviour
 
         if (!isLocalPlayer) return;
 
-        if (score < 0)
-            score = 0;
+        // if (score < 0)
+        //     score = 0;
 
         if(TrackAssign != -1)
             orb.SetActive(true);

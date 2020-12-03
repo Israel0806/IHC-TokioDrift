@@ -4490,6 +4490,8 @@ GameObject:
   - component: {fileID: 1529851583541834956}
   - component: {fileID: 5024853759090147847}
   - component: {fileID: 517719643231491015}
+  - component: {fileID: 6820591762749373261}
+  - component: {fileID: 187586216474935237}
   - component: {fileID: 5021435037513267439}
   m_Layer: 2
   m_Name: KartClassic_Player
@@ -4748,8 +4750,6 @@ MonoBehaviour:
   randOrbNumber: 0
   randTrackNumber: 0
   orb: {fileID: 7532149498304594756}
-  score: 0
-  scoreOtherPlayer: 0
   TrackAssign: -1
 --- !u!114 &5024853759090147847
 MonoBehaviour:
@@ -4765,6 +4765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  AK: {fileID: 8959652842386567622}
   currentScore: 0
 --- !u!114 &517719643231491015
 MonoBehaviour:
@@ -4780,6 +4781,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+--- !u!114 &6820591762749373261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959652842708129902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0795bc73b25c0e0e190ee13c441c03cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CS: {fileID: 517719643231491015}
+--- !u!114 &187586216474935237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959652842708129902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6aa5fb2b894daccc82a39e6d399bed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Score: {fileID: 5024853759090147847}
+  myScore: 0
 --- !u!135 &5021435037513267439
 SphereCollider:
   m_ObjectHideFlags: 0

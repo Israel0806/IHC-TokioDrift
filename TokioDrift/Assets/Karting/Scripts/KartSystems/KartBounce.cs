@@ -73,7 +73,8 @@ namespace KartGame.KartSystems
 
                     if(this.GetComponent<ArcadeKart>().isLocalPlayer)
                     {
-                        this.GetComponent<KartController>().score -= 10;
+                        //this.GetComponent<KartController>().score -= 10;
+                        this.GetComponent<ArcadeKart>().score -= 10;
                         //float _score = float.Parse(score.text);
                         //_score = _score - 10;
                         //if (_score <= 0)

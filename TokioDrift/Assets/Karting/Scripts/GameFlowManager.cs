@@ -13,13 +13,13 @@ public enum GameState { Play, Won, Lost }
 public class GameFlowManager : MonoBehaviour
 {
     
-    // [Header("Show score text ")]
-    // public TextMeshProUGUI textScore1;
-    // public TextMeshProUGUI textScore2;
+    [Header("Show score text ")]
+    public TextMeshProUGUI textScore1;
+    public TextMeshProUGUI textScore2;
     //public ControlComunication CCS;
     //public DisplayScore DS;
-    public GameObject GOCCS;
-    public GameObject GODS;
+    //public GameObject GOCCS;
+    //public GameObject GODS;
     [Header("Parameters")]
     [Tooltip("Duration of the fade-to-black at the end of the game")]
     public float endSceneLoadDelay = 3f;
@@ -75,7 +75,7 @@ public class GameFlowManager : MonoBehaviour
     public TrackController TC;
     public OrbController OC;
     public KartController[] kartsControllers;
-    
+    public DisplayScore[] kartsScore;
    
     void Start()
     {
@@ -84,6 +84,7 @@ public class GameFlowManager : MonoBehaviour
         //textScore2 = GameObject.Find("TextScore2").GetComponent<TextMeshProUGUI>();
         gamePhase = 0;
         isGameReady = false;
+        
         //if (playerKart == null) return;
         if (autoFindKarts)
         {
@@ -122,10 +123,10 @@ public class GameFlowManager : MonoBehaviour
         // build tracks and orbs
         kartsControllers = FindObjectsOfType<KartController>();
         //***************************************************************
-        GOCCS.SetActive(true);
-        GODS.SetActive(true);
-        GOCCS.GetComponent<ControlComunication>().enabled = true;
-        GODS.GetComponent<DisplayScore>().enabled = true;
+        //GOCCS.SetActive(true);
+        //GODS.SetActive(true);
+        //GOCCS.GetComponent<ControlComunication>().enabled = true;
+        //GODS.GetComponent<DisplayScore>().enabled = true;
         //***************************************************************
         foreach (KartController kart in kartsControllers)
         {
@@ -215,45 +216,54 @@ public class GameFlowManager : MonoBehaviour
             }
 
             //update the score of both players and send this data 
-            kartsControllers = FindObjectsOfType<KartController>();
-            foreach (ArcadeKart kart in karts)
-            {
-                if (kart.isLocalPlayer)
-                {
-                     kart.myScore = myScore;
-                }
-            }
+            // kartsControllers = FindObjectsOfType<KartController>();
+            // foreach (ArcadeKart kart in karts)
+            // {
+            //     if (kart.isLocalPlayer)
+            //     {
+            //          kart.myScore = myScore;
+            //     }
+            // }
             
-            /*
-            foreach (ArcadeKart kart in karts)
-            {
-                if (kart.isHost)
-                {
-                    kart.scoreOtherPlayer = Score2;
-                }
-                else
-                {
-                    kart.scoreOtherPlayer = Score1;
-                }
-            }
+            
+            // foreach (ArcadeKart kart in karts)
+            // {
+            //     if (kart.isHost)
+            //     {
+            //         kart.scoreOtherPlayer = Score2;
+            //     }
+            //     else
+            //     {
+            //         kart.scoreOtherPlayer = Score1;
+            //     }
+            // }
             //Write in the interface the scores of both playrs
-            foreach (ArcadeKart kart in karts)
+            int k = 0;
+            kartsScore = FindObjectsOfType<DisplayScore>();
+            foreach (DisplayScore _score in kartsScore)
             {
-                if (kart.isHost)
-                {
-                    textScore1.text = (Score1).ToString();
-                    textScore2.text = (Score2).ToString();
-                    break;
+                if(k == 0 ){
+                    textScore1.text = (_score.myScore).ToString();
+                    k++;
+                }else{
+                    textScore2.text = (_score.myScore).ToString();
                 }
-                else
-                {
-                    textScore1.text = (Score2).ToString();
-                    textScore2.text = (Score1).ToString();
-                    break;
-                }
+                
+                // if (kart.isHost)
+                // {
+                //     textScore1.text = (Score1).ToString();
+                //     textScore2.text = (Score2).ToString();
+                //     break;
+                // }
+                // else
+                // {
+                //     textScore1.text = (Score2).ToString();
+                //     textScore2.text = (Score1).ToString();
+                //     break;
+                // }
             }
 
-            */
+            
             if (m_ObjectiveManager.AreAllObjectivesCompleted())
                 EndGame(true);
 

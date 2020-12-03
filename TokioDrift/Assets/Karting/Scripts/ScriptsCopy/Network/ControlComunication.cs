@@ -8,9 +8,9 @@ public class ControlComunication : MonoBehaviour
     //Some references
     
     [Header("Reference")]
-    private ComunicationStates CS = null;
-    [SerializeField] private TrackController TC = null;
-    [SerializeField] private OrbController OC = null;
+    [SerializeField] private ComunicationStates CS = null;
+    private TrackController TC = null;
+    private OrbController OC = null;
 
     void Awake()
     {
@@ -19,11 +19,13 @@ public class ControlComunication : MonoBehaviour
 
     void OnEnable()
     {
-        ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
-        foreach (ArcadeKart kart in karts){
-            if(kart.isLocalPlayer) CS = kart.GetGameObject().GetComponent<ComunicationStates>();
-        }
-                
+        // ArcadeKart []karts = FindObjectsOfType<ArcadeKart>();
+        // foreach (ArcadeKart kart in karts){
+        //     if(kart.isLocalPlayer) CS = kart.GetGameObject().GetComponent<ComunicationStates>();
+        // }
+        TC = GameObject.Find("===TRACK====").GetComponent<TrackController>();
+        OC = GameObject.Find("====ORB=====").GetComponent<OrbController>();
+
         CS.EventChangeSomeOrbe += HandleChangeOfOrbe;
         CS.EventChangeSomeTrack += HandleChangeOfTrack;
         print("onEnable CCS");

@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KartGame.KartSystems;
 using Mirror;
 
 public class Score : NetworkBehaviour
 {    
     [Header("Reference")]
-    private GameFlowManager GameFlow ;
+    //private GameFlowManager GameFlow ;
+    public ArcadeKart AK;
     public delegate void ChangeScore(int newValue); 
 
     [SyncVar]
@@ -28,7 +30,7 @@ public class Score : NetworkBehaviour
     {
         print("score ready!");
         SetChangeNewScore(0); 
-        GameFlow = GameObject.Find("GameManager").GetComponent<GameFlowManager>(); 
+        //GameFlow = GameObject.Find("GameManager").GetComponent<GameFlowManager>(); 
     } 
     
     [Command]
@@ -43,10 +45,10 @@ public class Score : NetworkBehaviour
     {
         if (!hasAuthority) { return;} 
         
-        if(currentScore != GameFlow.myScore )// my score is change 
+        if(currentScore != AK.myScore )// my score is change 
         {
             print("CmdSetNewScore **");
-            CmdSetNewScore(GameFlow.myScore);
+            CmdSetNewScore(AK.myScore);
         }
 
     }
