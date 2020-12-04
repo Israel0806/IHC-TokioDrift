@@ -13,37 +13,15 @@ public class Track : MonoBehaviour
     public GameObject[] effects;
     public int identification;
 
+    public int playerID;
+
     public int TrackNumber;
 
     public AudioClip CollectSound;
     public bool isRepaired;
     private GameFlowManager GameFlow ;
     public bool isReady = false;
-/*
-    public delegate void ChangeSomeTrack(int changeTrack, bool state);
 
-    [SyncEvent]
-    public event ChangeSomeTrack EventChangeSomeTrack;
-
-    public GameObject GetObject()
-    {
-        return gameObject;
-    }
-
-    #region Server 
-    [Server]
-    private void SetChangeTrack(int changeTrack)
-    {
-        print("SetChangeTrack");
-        EventChangeSomeTrack?.Invoke(changeTrack, true); 
-    }
-
-    [Command]
-    private void CmdSetChangeTrack(int val) => SetChangeTrack(val);
-    
-
-    #endregion
-*/
     public void ExplodeTrack()
     {
         if(mMaterial)
@@ -96,11 +74,12 @@ public class Track : MonoBehaviour
         if (co.tag.Equals("Player"))
         {
             //print("UNO-1T");
-            if (co.GetComponent<KartController>().TrackAssign == TrackNumber && !isRepaired)
+            if (co.GetComponent<ArcadeKart>().TrackAssign == TrackNumber && !isRepaired)
             {
                 //print("UNO-2T");    
                 isRepaired = true;
-                co.GetComponent<KartController>().TrackAssign = -1;
+                playerID = co.GetComponent<KartController>().playerID;
+                co.GetComponent<ArcadeKart>().TrackAssign = -1;
                 //print("UNO-3T");
                 co.GetComponent<ArcadeKart>().myScore += 100;
                 // GameFlow.myScore += 100;

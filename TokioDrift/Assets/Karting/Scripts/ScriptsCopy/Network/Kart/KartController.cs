@@ -22,43 +22,23 @@ public class KartController : NetworkBehaviour
     private SimpleTrigger FinishLineTrigger;
     private GameObject gameManager;
 
+    [SyncVar]
+    public int playerID;
+
+    [SyncVar]
+    public int randOrbNumber;
+    
+    [SyncVar]
+    public int randTrackNumber;
+
     [Header("Colab variables")]
     public bool isHost;
-    public int randOrbNumber;
-    public int randTrackNumber;
     public GameObject orb;
 
     private Track[] tracks;
     private Orb[] orbs;
 
-    //[Header("Game Stats")]
-    
-    // [SyncVar]
-    // public int score = 0;
-    // [SyncVar]
-    // public int scoreOtherPlayer = 0; 
-    
-
-    //El objeto orbe le asigana al juegador el track que debe ir  a conseguir
-    public int TrackAssign = -1;
-
-    /*
-    public override void OnStartServer()
-    {
-        PrandOrbNumber = Random.Range(0, 10);
-        PrandTrackNumber = Random.Range(0, 10);
-        RpcOnFire(PrandOrbNumber,PrandTrackNumber);
-    }
-
-    [ClientRpc]
-    void RpcOnFire(PrandOrbNumber,PrandTrackNumber)
-    {
-        randOrbNumber = PrandOrbNumber;
-        randTrackNumber = PrandTrackNumber;
-    }
-    */
-
-    public override void OnStartServer(){
+    public override void OnStartServer() {
         print("KartController ready!");
     }
     
@@ -110,7 +90,7 @@ public class KartController : NetworkBehaviour
         /// Kart
         arcadeKart = this.GetComponent<ArcadeKart>();
         arcadeKart.isLocalPlayer = true;
-
+        arcadeKart.playerID = playerID;
         //arcadeKart.isHost = true;
         arcadeKart.randOrbNumber = randOrbNumber;
         arcadeKart.randTrackNumber = randTrackNumber;
@@ -121,7 +101,7 @@ public class KartController : NetworkBehaviour
         camera.m_LookAt = this.transform;
 
 
-        TrackAssign = -1;
+        // TrackAssign = -1;
 
         arcadeKart.SetCanMove(false);
     }
@@ -134,14 +114,10 @@ public class KartController : NetworkBehaviour
         if(isHost) arcadeKart.isHost = true;
 
         if (!isLocalPlayer) return;
-
+        // print("My id: " + playerID.ToString());
         // if (score < 0)
         //     score = 0;
 
-        if(TrackAssign != -1)
-            orb.SetActive(true);
-        else
-            orb.SetActive(false);
 
     }
 

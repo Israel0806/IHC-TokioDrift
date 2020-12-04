@@ -13,6 +13,8 @@ namespace KartGame.KartSystems
         /// Contains parameters that can adjust the kart's behaviors temporarily.
         /// </summary>
         public int myScore = 0;
+        public int TrackAssign = -1;
+        public int playerID;
 
         [System.Serializable]
         public class StatPowerup
@@ -168,6 +170,7 @@ namespace KartGame.KartSystems
         {
             score = 0;
             isHost = false;
+            TrackAssign = -1;
             scoreOtherPlayer = 0;
             isLocalPlayer = false;
             hasPhoneConnected = false;
@@ -176,6 +179,7 @@ namespace KartGame.KartSystems
             m_Inputs = GetComponents<IInput>();
             suspensionNeutralPos = SuspensionBody.transform.localPosition;
             suspensionNeutralRot = SuspensionBody.transform.localRotation;
+            
         }
 
         void Start()
@@ -188,8 +192,16 @@ namespace KartGame.KartSystems
         void FixedUpdate()
         {
             // this allows only to move my car and no one elses
-            if (!isLocalPlayer)
+            if (!isLocalPlayer) {
+                // print("PlayerID: " + playerID.ToString());
                 return;
+            }
+            // print("OtherID: " + playerID.ToString());
+
+            if(TrackAssign != -1)
+                gameObject.transform.GetChild(11).gameObject.SetActive(true);
+            else
+                gameObject.transform.GetChild(11).gameObject.SetActive(false);
 
 
             ResetIfStuck();

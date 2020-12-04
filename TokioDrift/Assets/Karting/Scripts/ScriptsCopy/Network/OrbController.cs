@@ -8,17 +8,17 @@ public class OrbController : MonoBehaviour
     // [Header("Reference")]
     // [SerializeField] private Orb instanceOfCE= null;
     [Header("Initial position orbs")]
-    public Transform orbSpawn1;
-    public Transform orbSpawn2;
-    public Transform orbSpawn3;
-    public Transform orbSpawn5;
-    public Transform orbSpawn4;
-    public Transform orbSpawn6;
-    public Transform orbSpawn7;
-    public Transform orbSpawn8;
-    public Transform orbSpawn9;
-    public Transform orbSpawn10;
-    public List<Transform> orbSpawns = new List<Transform>();
+    // public Transform orbSpawn1;
+    // public Transform orbSpawn2;
+    // public Transform orbSpawn3;
+    // public Transform orbSpawn5;
+    // public Transform orbSpawn4;
+    // public Transform orbSpawn6;
+    // public Transform orbSpawn7;
+    // public Transform orbSpawn8;
+    // public Transform orbSpawn9;
+    // public Transform orbSpawn10;
+    // public List<Transform> orbSpawns = new List<Transform>();
 
     [Header("Prefab orbs")]
     public GameObject orbPrefab;
@@ -46,28 +46,45 @@ public class OrbController : MonoBehaviour
 
     public void CreateOrbs(int randomNumber)
     {
-        orbSpawns.Add(orbSpawn1);
-        orbSpawns.Add(orbSpawn2);
-        orbSpawns.Add(orbSpawn3);
-        orbSpawns.Add(orbSpawn4);
-        orbSpawns.Add(orbSpawn5);
-        orbSpawns.Add(orbSpawn6);
-        orbSpawns.Add(orbSpawn7);
-        orbSpawns.Add(orbSpawn8);
-        orbSpawns.Add(orbSpawn9);
-        orbSpawns.Add(orbSpawn10);
+        // orbSpawns.Add(orbSpawn1);
+        // orbSpawns.Add(orbSpawn2);
+        // orbSpawns.Add(orbSpawn3);
+        // orbSpawns.Add(orbSpawn4);
+        // orbSpawns.Add(orbSpawn5);
+        // orbSpawns.Add(orbSpawn6);
+        // orbSpawns.Add(orbSpawn7);
+        // orbSpawns.Add(orbSpawn8);
+        // orbSpawns.Add(orbSpawn9);
+        // orbSpawns.Add(orbSpawn10);
         //randomNumber = Random.Range(0, 10);
-        foreach (Transform orbSpawn in orbSpawns)
+        int index = 0;
+        orbs = FindObjectsOfType<Orb>();
+        foreach (Orb orb in orbs)
         {
             if (randomNumber == 10) randomNumber = 0;
-            GameObject orb = Instantiate(orbPrefab, orbSpawn.position, orbSpawn.rotation);
-            orb.GetComponent<Orb>().trackAsignationForOrbe = randomNumber;
-            orb.GetComponent<Orb>().identification = randomNumber;
+            //GameObject orb = Instantiate(orbPrefab, orbSpawn.position, orbSpawn.rotation);
+            orb.trackAsignationForOrbe = randomNumber;
+            orb.identification = randomNumber;
             //NetworkServer.Spawn(orb);
-            orbes.Add(orb);
+            orbes.Add(orb.GetObject());
+            ParticleSystem orbParticle1 = orb.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
+            ParticleSystem orbParticle2 = orb.transform.GetChild(2).gameObject.GetComponent<ParticleSystem>();
+            //ParticleSystem orbParticle = orb.GetComponentInChildren(typeof(ParticleSystem)) as ParticleSystem;
+            if (index < 5)
+            {
+                orb.GetComponent<Orb>().playerID = 1;
+                orbParticle1.startColor = new Color(0, 1, 0, .5f);
+                orbParticle2.startColor = new Color(0, 1, 0, .5f);
+            }
+            else
+            {
+                orb.GetComponent<Orb>().playerID = 2;
+                orbParticle1.startColor = new Color(1, 0, 0, .5f);
+                orbParticle2.startColor = new Color(1, 0, 0, .5f);
+            }
+            index++;
             randomNumber++;
         }
-        SetOrbs();
     }
 
     // Start is called before the first frame update

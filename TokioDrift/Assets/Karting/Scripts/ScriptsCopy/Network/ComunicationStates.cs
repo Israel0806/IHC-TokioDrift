@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using TMPro;
+
 public class ComunicationStates : NetworkBehaviour
 {
 
@@ -11,56 +13,111 @@ public class ComunicationStates : NetworkBehaviour
     private TrackController TC;
     private OrbController OC;
 
+    
+    public TextMeshProUGUI objective1;
+    public TextMeshProUGUI objective2;
+
     //state 1 = delete it
     //state 2 = activate for all(only in case of tracks )
 
-    public delegate void ChangeSomeOrbe(int changeOrb, bool state); 
-    public delegate void ChangeSomeTrack(int changeTrack, bool state);
+    // public delegate void ChangeSomeOrbe(int changeOrb, bool state); 
+    // public delegate void ChangeSomeTrack(int changeTrack, int playerID, bool state);
 
-    [SyncEvent]
-    public event ChangeSomeOrbe EventChangeSomeOrbe;
-    [SyncEvent]
-    public event ChangeSomeTrack EventChangeSomeTrack;
-
-    #region Server
+    // [SyncEvent]
+    // public event ChangeSomeOrbe EventChangeSomeOrbe;
+    // [SyncEvent]
+    // public event ChangeSomeTrack EventChangeSomeTrack;
 
     public override void OnStartServer()
     {
-        TC = GameObject.Find("===TRACK====").GetComponent<TrackController>();
-        OC = GameObject.Find("====ORB=====").GetComponent<OrbController>();
+        // TC = GameObject.Find("===TRACK====").GetComponent<TrackController>();
+        // OC = GameObject.Find("====ORB=====").GetComponent<OrbController>();
         print("ComunicationStates ready !");
     } 
     
-    [Server]
-    private void SetChangeOrbe(int changeOrb)
+    [ClientRpc]
+    public void RpcSetChangeOrbe(int iden)
     {
-        print("SetChangeOrbe");
-        print(changeOrb);
-        print("---------------"); 
-        EventChangeSomeOrbe?.Invoke(changeOrb, true); 
+        OC.auxAllOrbsCollected = true;
+        foreach (Orb orb in OC.orbs)
+        {
+            if (orb != null && orb.identification == iden )
+            {
+                //print("Other player change his orb");
+                OC.ActivateTrack(orb.trackAsignationForOrbe);
+                //destroyOrd(orb);
+                print("Number of Orb");
+                print(iden);
+                print("******************");
+                orb.DestroyGameObject();
+                OC.auxAllOrbsCollected = false;
+                OC.SetOrbs();
+                break;
+            }
+        }
+        if (OC.auxAllOrbsCollected) OC.allOrbsCollected = true;
+        // print("SetChangeOrbe");
+        // print(changeOrb);
+        // print("---------------"); 
+        // EventChangeSomeOrbe?.Invoke(changeOrb, true); 
     }
 
-    [Server]
-    private void SetChangeTrack(int changeTrack)
+    [ClientRpc]
+    public void RpcSetChangeTrack(int iden, int playerID)
     {
-        print("SetChangeTrack");
-        print(changeTrack);
-        print("---------------"); 
-        EventChangeSomeTrack?.Invoke(changeTrack, true); 
+        foreach (Track track in TC.tracks){
+            // print("xxxxxxxxxxxxxxxxxxxxxxx");
+            // print(track.identification);
+            // print("xxxxxxxxxxxxxxxxxxxxxxx");
+            if (track != null && track.identification == iden)
+            {
+                print("Number of Track");
+                print(iden);
+                print("******************");
+                track.TrackRepaired();
+                track.isReady = true;
+                if(playerID == 1)
+                {
+                    string str = objective1.text;
+                    int tracks = int.Parse(str.Substring(0, 1));
+                    objective1.text = (tracks + 1).ToString() + " / 5";
+                } else {
+                    string str = objective2.text;
+                    int tracks = int.Parse(str.Substring(0, 1));
+                    objective2.text = (tracks + 1).ToString() + " / 5";
+                }
+            }
+        }
+        // print("SetChangeTrack");
+        // print(changeTrack);
+        // print("---------------"); 
+        // EventChangeSomeTrack?.Invoke(changeTrack, playerID, true); 
     }
 
     [Command]
-    private void CmdSetChangeOrbe(int val) => SetChangeOrbe(val);
+    private void CmdSetChangeOrbe(int val) => RpcSetChangeOrbe(val);
 
     [Command]
-    private void CmdSetChangeTrack(int val) => SetChangeTrack(val);
+    private void CmdSetChangeTrack(int val, int playerID) => RpcSetChangeTrack(val, playerID);
     
 
-    #endregion
+    void Start()
+    {
+        TC = GameObject.Find("===TRACK====").GetComponent<TrackController>();
+        OC = GameObject.Find("====ORB=====").GetComponent<OrbController>();
 
+        if(TC == null)
+            print("Not TC");
+        if(OC == null)
+            print("Not OC");
+        
+        objective1 = GameObject.Find("TextObjective1").GetComponent<TextMeshProUGUI>();
+        objective2 = GameObject.Find("TextObjective2").GetComponent<TextMeshProUGUI>();
+        
+        print("ComunicationStates ready client !");
+    }
 
-    #region Client 
-    [ClientCallback]
+    [Client]
     private void Update()
     {
         
@@ -73,7 +130,7 @@ public class ComunicationStates : NetworkBehaviour
             if (track != null && track.isRepaired && !track.isReady ) 
             {
                 track.isReady = true;
-                CmdSetChangeTrack(track.identification);
+                CmdSetChangeTrack(track.identification, track.playerID);
             }           
         }
             
@@ -85,5 +142,4 @@ public class ComunicationStates : NetworkBehaviour
         }               
     }
 
-    #endregion
 }

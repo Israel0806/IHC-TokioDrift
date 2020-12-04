@@ -90,9 +90,11 @@ MonoBehaviour:
   - {fileID: 3561598033669967198}
   - {fileID: 4385048592939690069}
   identification: 0
-  TrackNumber: 0
+  playerID: 0
+  TrackNumber: -1
   CollectSound: {fileID: 8300000, guid: c1d1b8740810641508a7156b10ff59f2, type: 3}
   isRepaired: 0
+  isReady: 0
 --- !u!65 &7801653115246555955
 BoxCollider:
   m_ObjectHideFlags: 0

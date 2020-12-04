@@ -9,6 +9,7 @@ public class Orb : MonoBehaviour
     private KartController asd;
     public Rigidbody rigidBody;
     public int identification;
+    public int playerID;
 
     [Header("Orb stat")]
     public int  trackAsignationForOrbe = -1;
@@ -21,7 +22,7 @@ public class Orb : MonoBehaviour
 
     public void DestroyGameObject()
     {
-        Destroy(gameObject);
+        Destroy(gameObject, 1);
     }
 
     public GameObject GetObject()
@@ -29,56 +30,15 @@ public class Orb : MonoBehaviour
         return gameObject;
     }
 
-    /*
-    #region Server 
-    
-    [Server]
-    private void SetChangeOrbe(int changeOrb)
-    {
-        print("SetChangeOrbe");
-        EventChangeSomeOrbe?.Invoke(changeOrb, true); 
-    }
-
-    [Command]
-    private void CmdSetChangeOrbe(int val) => SetChangeOrbe(val);
-
-    #endregion
-    */
-
-    //void OnCollisionEnter(Collision target)
-    //{
-    //    if (target.gameObject.tag == "Player")
-    //    {
-    //        print("bang");
-    //        target.gameObject.GetComponent<KartController>().TrackAssign = trackAsignationForOrbe;
-    //        isCollected = true;
-    //    }
-    //}
-
     void OnTriggerEnter(Collider co)
     {
-        //print("UNO-1O");
+        ArcadeKart kart = co.GetComponent<ArcadeKart>();
         //Hit another player
-        if (co.tag.Equals("Player") && co.GetComponent<KartController>().TrackAssign == -1)
+        if (co.tag.Equals("Player") && kart.TrackAssign == -1 && co.gameObject.GetComponent<KartController>().playerID == playerID)
         {
-            //print("UNO-20");   
             //set the tracker corresponce  
             isCollected = true;
-            //print("UNO-30");
-            co.GetComponent<KartController>().TrackAssign = trackAsignationForOrbe;
-            //print("UNO-40");
+            kart.TrackAssign = trackAsignationForOrbe;
         }
     }
-/*
-    #region Client 
-    
-    [ClientCallback]
-    private void Update()
-    {
-        if (!hasAuthority) { return;} 
-        if (isCollected) CmdSetChangeOrbe(identification);               
-    }
-
-    #endregion
-*/
 }

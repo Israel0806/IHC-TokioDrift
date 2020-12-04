@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KartGame.KartSystems;
+using TMPro;
 
 public class ControlComunication : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class ControlComunication : MonoBehaviour
     [SerializeField] private ComunicationStates CS = null;
     private TrackController TC = null;
     private OrbController OC = null;
+
+    public TextMeshProUGUI objective1;
+    public TextMeshProUGUI objective2;
+
 
     void Awake()
     {
@@ -25,9 +30,11 @@ public class ControlComunication : MonoBehaviour
         // }
         TC = GameObject.Find("===TRACK====").GetComponent<TrackController>();
         OC = GameObject.Find("====ORB=====").GetComponent<OrbController>();
+        objective1 = GameObject.Find("TextObjective1").GetComponent<TextMeshProUGUI>();
+        objective2 = GameObject.Find("TextObjective2").GetComponent<TextMeshProUGUI>();
 
-        CS.EventChangeSomeOrbe += HandleChangeOfOrbe;
-        CS.EventChangeSomeTrack += HandleChangeOfTrack;
+        // CS.EventChangeSomeOrbe += HandleChangeOfOrbe;
+        // CS.EventChangeSomeTrack += HandleChangeOfTrack;
         print("onEnable CCS");
         print("si");
         print("---------------"); 
@@ -35,8 +42,8 @@ public class ControlComunication : MonoBehaviour
 
     void  onDisable()
     {
-        CS.EventChangeSomeOrbe -= HandleChangeOfOrbe;       
-        CS.EventChangeSomeTrack -= HandleChangeOfTrack;
+        // CS.EventChangeSomeOrbe -= HandleChangeOfOrbe;       
+        // CS.EventChangeSomeTrack -= HandleChangeOfTrack;
         print("onDisable CCS");
         print("si");
         print("---------------");
@@ -62,7 +69,7 @@ public class ControlComunication : MonoBehaviour
         if (OC.auxAllOrbsCollected) OC.allOrbsCollected = true;
     }
 
-    private void HandleChangeOfTrack(int iden, bool state)
+    private void HandleChangeOfTrack(int iden, int playerID, bool state)
     {
         //change my orbs and track with this new information 
         foreach (Track track in TC.tracks){
@@ -76,6 +83,17 @@ public class ControlComunication : MonoBehaviour
                 print("******************");
                 track.TrackRepaired();
                 track.isReady = true;
+                if(playerID == 1)
+                {
+                    string str = objective1.text;
+                    int tracks = int.Parse(str.Substring(0, 1));
+                    objective1.text = (tracks + 1).ToString() + " / 5";
+                } else
+                {
+                    string str = objective2.text;
+                    int tracks = int.Parse(str.Substring(0, 1));
+                    objective2.text = (tracks + 1).ToString() + " / 5";
+                }
             }
         }   
     }    

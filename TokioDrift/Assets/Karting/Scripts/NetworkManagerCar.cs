@@ -4,7 +4,7 @@ using Mirror;
 using Steamworks;
 using System.Diagnostics;
 using System;
-//using KartGame.KartSystems;
+using KartGame.KartSystems;
 using TMPro;
 using UnityEngine.UI;
 
@@ -56,8 +56,14 @@ public class NetworkManagerCar : NetworkManager
         GameObject player = Instantiate(playerPrefab, trans.position, trans.rotation);
         NetworkServer.AddPlayerForConnection(conn, player);
         if (numPlayers == 1)
+        {
             player.GetComponent<KartController>().isHost = true;
-
+            player.GetComponent<KartController>().playerID = 1;
+        }
+        else
+        {
+            player.GetComponent<KartController>().playerID = 2;
+        }
         // if (numPlayers == 2)
         // {
         //     print("to be CS spawned");
