@@ -8,11 +8,11 @@ public class OrbController : MonoBehaviour
     // [Header("Reference")]
     // [SerializeField] private Orb instanceOfCE= null;
     [Header("Initial position orbs")]
-    // public Transform orbSpawn1;
-    // public Transform orbSpawn2;
-    // public Transform orbSpawn3;
-    // public Transform orbSpawn5;
-    // public Transform orbSpawn4;
+    //public Transform orbSpawn1;
+    //public Transform orbSpawn2;
+    //public Transform orbSpawn3;
+    //public Transform orbSpawn5;
+    //public Transform orbSpawn4;
     // public Transform orbSpawn6;
     // public Transform orbSpawn7;
     // public Transform orbSpawn8;
@@ -26,17 +26,10 @@ public class OrbController : MonoBehaviour
     [Header("Values")]
     public bool allOrbsCollected = false;
     public List<GameObject> orbes = new List<GameObject>();
-    //public int randomNumber = 0;
     public bool auxAllOrbsCollected = true;
     public Track[] tracks;
     public Orb[] orbs;
-    //Cuando iniciamos el servidor: 
-    //1)creamos los orb sgun el random
-    //2)Asignamos su random
-    //public override void OnStartServer()
-    //{
-
-    //}
+    
 
     public void SetOrbs()
     {
@@ -44,27 +37,19 @@ public class OrbController : MonoBehaviour
         orbs = FindObjectsOfType<Orb>();
     }
 
-    public void CreateOrbs(int randomNumber)
+    // public void CreateOrbs(int randomNumber)
+    public void CreateOrbs()
     {
-        // orbSpawns.Add(orbSpawn1);
-        // orbSpawns.Add(orbSpawn2);
-        // orbSpawns.Add(orbSpawn3);
-        // orbSpawns.Add(orbSpawn4);
-        // orbSpawns.Add(orbSpawn5);
-        // orbSpawns.Add(orbSpawn6);
-        // orbSpawns.Add(orbSpawn7);
-        // orbSpawns.Add(orbSpawn8);
-        // orbSpawns.Add(orbSpawn9);
-        // orbSpawns.Add(orbSpawn10);
-        //randomNumber = Random.Range(0, 10);
         int index = 0;
-        orbs = FindObjectsOfType<Orb>();
+        //orbs = FindObjectsOfType<Orb>();
         foreach (Orb orb in orbs)
         {
-            if (randomNumber == 10) randomNumber = 0;
+            //if (randomNumber == 10) randomNumber = 0;
             //GameObject orb = Instantiate(orbPrefab, orbSpawn.position, orbSpawn.rotation);
-            orb.trackAsignationForOrbe = randomNumber;
-            orb.identification = randomNumber;
+            // orb.trackAsignationForOrbe = randomNumber;
+            // orb.identification = randomNumber;
+            orb.trackAsignationForOrbe = index;
+            orb.identification = index;
             //NetworkServer.Spawn(orb);
             orbes.Add(orb.GetObject());
             ParticleSystem orbParticle1 = orb.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
@@ -72,18 +57,18 @@ public class OrbController : MonoBehaviour
             //ParticleSystem orbParticle = orb.GetComponentInChildren(typeof(ParticleSystem)) as ParticleSystem;
             if (index < 5)
             {
-                orb.GetComponent<Orb>().playerID = 1;
+                orb.playerID = 1;
                 orbParticle1.startColor = new Color(0, 1, 0, .5f);
                 orbParticle2.startColor = new Color(0, 1, 0, .5f);
             }
             else
             {
-                orb.GetComponent<Orb>().playerID = 2;
+                orb.playerID = 2;
                 orbParticle1.startColor = new Color(1, 0, 0, .5f);
                 orbParticle2.startColor = new Color(1, 0, 0, .5f);
             }
             index++;
-            randomNumber++;
+            // randomNumber++;
         }
     }
 
@@ -102,8 +87,8 @@ public class OrbController : MonoBehaviour
 
     public void ActivateTrack(int trackAsignationForOrbe)
     {
-        if (tracks.Length == 0)
-            tracks = FindObjectsOfType<Track>();
+        //if (tracks.Length == 0)
+        //    tracks = FindObjectsOfType<Track>();
         foreach (Track track in tracks)
             if (track.TrackNumber == trackAsignationForOrbe)
                 track.MyOrbIsActive();

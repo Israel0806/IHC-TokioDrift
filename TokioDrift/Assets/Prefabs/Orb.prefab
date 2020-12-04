@@ -9689,8 +9689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 1777129532080272121}
-  identification: 0
-  playerID: 0
+  identification: -1
+  playerID: -1
   trackAsignationForOrbe: -1
   isCollected: 0
 --- !u!135 &6802744982761181819

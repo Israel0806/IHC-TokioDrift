@@ -24,19 +24,20 @@ public class TrackController : MonoBehaviour
         //tracksDestroyed = new bool[10];
     }
 
-    public void SelectTracks(int randomNumber)
+    // public void SelectTracks(int randomNumber)
+    public void SelectTracks()
     {
         
         int randomTrack/* = Random.Range(0, 10)*/;
         //tracks = new Track[10];
-        Track[] AllTracks;
-        AllTracks = FindObjectsOfType<Track>();
-        tracks = new Track[10];
+        //Track[] AllTracks;
+        //tracks = FindObjectsOfType<Track>();
+        //tracks = new Track[10];
         // int[] tracksSelected = new int[10]; // index of tracks selected
         // int tracksSelectedIndex = 0; 
         for (int index = 0; index < 10; ++index) {
-            if (index > AllTracks.Length) break;
-            if (randomNumber == 10) randomNumber = 0;
+            //if (index > AllTracks.Length) break;
+            //if (randomNumber == 10) randomNumber = 0;
             // randomTrack = UnityEngine.Random.Range(0, AllTracks.Length); /// elegir un track al azar
             
             /// check if track has already been selected
@@ -50,12 +51,13 @@ public class TrackController : MonoBehaviour
             // }
             /// asign track
             // tracksSelected[tracksSelectedIndex++] = randomTrack;
+            //tracks[index] = AllTracks[index].GetComponent<Track>();
+            // tracks[index].TrackNumber = randomNumber;
+            // tracks[index].identification = randomNumber;
+            tracks[index].TrackNumber = index;
+            tracks[index].identification = index;
 
-            tracks[index] = AllTracks[index].GetComponent<Track>();
-            tracks[index].TrackNumber = randomNumber;
-            tracks[index].identification = randomNumber;
-
-            randomNumber++;
+            // randomNumber++;
         }
 
         Invoke("ExplodeTracks", 3f);

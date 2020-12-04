@@ -140,8 +140,8 @@ public class GameFlowManager : MonoBehaviour
         foreach (KartController kart in kartsControllers)
         {
 
-            TC.SelectTracks(kart.randTrackNumber);
-            OC.CreateOrbs(kart.randOrbNumber);   
+            TC.SelectTracks();
+            OC.CreateOrbs();   
 
             break;
             
